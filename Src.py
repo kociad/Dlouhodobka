@@ -8,6 +8,29 @@ def BLANKV():
     global inventar #Inventář musí být vždy globální
     volba=input("Zadej příkaz:")
     volba=volba.lower()
+    #---------------------DEBUG----------------------
+    if "dbg_tutorial_skip" in volba:
+        NOVA_HRA()
+    if "dbg_op" in volba:
+        OPT()
+    if "dbg_kuchyne" in volba:
+        KUCHYNET()
+    if "dbg_koupelna" in volba:
+        KOUPELNAT()
+    if "dbg_herna" in volba:
+        HERNAT()
+    if "dbg_knihovna" in volba:
+        KNIHOVNAT()
+    if "dbg_loznice" in volba:
+        LOZNICET()
+    if "dbg_balkon" in volba:
+        BALKONT()
+    if "dbg_puda" in volba:
+        PUDAT()
+    if "dbg_inv" in volba:
+        volbaa=input("Zadej předmět:")
+        inventar.append(volbaa)
+    #------------------------------------------------
     if volba=="inventář" or volba=="inventar": #Kontrola inventáře
         print(inventar)
         BLANKV() #Návrat na začátek fce
@@ -43,7 +66,7 @@ def BLANKV():
 #SC01 (SKLEP TMA)
 def SKLEP1T():
     winsound.PlaySound("sound/basement.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
-    print("Vítej do mojí hry! Pro provedení akce piš do příkazové řádky. Hra má tři hlavní akce: 'Prozkoumej' 'Vezmi' a 'Použij'. Svůj inventář si prohlédneš příkazem 'inventář'. Tyto akce kombinuj s předměty v herním světě nebo v inventáři. Objekty piš vždy v prvním pádě (hlavu=hlava atd.). Přeji příjemné hraní")
+    print("Vítej do mojí hry! Pro provedení akce piš do příkazové řádky. Hra má tři hlavní akce: 'Prozkoumej' 'Vezmi' a 'Použij'. Svůj inventář si prohlédneš příkazem 'inventář'. Tyto akce kombinuj s předměty v herním světě nebo v inventáři. Objekty piš vždy v prvním pádě (hlavu=hlava atd.). Pojďme si to vyzkoušet v tomto úvodu.")
     print("Probouzíš se v chladné a vlhké místnosti. Vzadu na hlavě cítíš ostrou bolest. Tvé ruce jsou svázáné, ale naštěstí cítíš v kapse svůj věrný nůž.")
     print("Co uděláš?")
     global inventar
@@ -62,8 +85,29 @@ def SKLEP1V():
     if volba=="inventář" or volba=="inventar":
         print(inventar)
         SKLEP1V()
-    if "dbg_opv" in volba:
+    #---------------------DEBUG----------------------
+    if "dbg_tutorial_skip" in volba:
         NOVA_HRA()
+    if "dbg_op" in volba:
+        OPT()
+    if "dbg_kuchyne" in volba:
+        KUCHYNET()
+    if "dbg_koupelna" in volba:
+        KOUPELNAT()
+    if "dbg_herna" in volba:
+        HERNAT()
+    if "dbg_knihovna" in volba:
+        KNIHOVNAT()
+    if "dbg_loznice" in volba:
+        LOZNICET()
+    if "dbg_balkon" in volba:
+        BALKONT()
+    if "dbg_puda" in volba:
+        PUDAT()
+    if "dbg_inv" in volba:
+        volbaa=input("Zadej předmět:")
+        inventar.append(volbaa)
+    #------------------------------------------------
     if "prozkoumej" in volba:
         if "místnost" in volba:
             print("Obklopuje tě tma, skoro nic nevidíš. Naproti tobě proniká skulinkou pod něčím, co by mohly být dveře, trocha světla, která stačí na to aby sis všiml tlačítka na zdi.")
@@ -161,6 +205,29 @@ def SKLEP2V():
     global dvereopen
     volba=input("Zadej příkaz:")
     volba=volba.lower()
+    #---------------------DEBUG----------------------
+    if "dbg_tutorial_skip" in volba:
+        NOVA_HRA()
+    if "dbg_op" in volba:
+        OPT()
+    if "dbg_kuchyne" in volba:
+        KUCHYNET()
+    if "dbg_koupelna" in volba:
+        KOUPELNAT()
+    if "dbg_herna" in volba:
+        HERNAT()
+    if "dbg_knihovna" in volba:
+        KNIHOVNAT()
+    if "dbg_loznice" in volba:
+        LOZNICET()
+    if "dbg_balkon" in volba:
+        BALKONT()
+    if "dbg_puda" in volba:
+        PUDAT()
+    if "dbg_inv" in volba:
+        volbaa=input("Zadej předmět:")
+        inventar.append(volbaa)
+    #------------------------------------------------
     if volba=="inventář" or volba=="inventar":
         print(inventar)
         SKLEP2V()
@@ -271,18 +338,24 @@ def NOVA_HRA():
     zamek_gama_zamcen=1
     global trezor_zamcen
     trezor_zamcen=1
-    global nuz_tupy
-    nuz_tupy=1
     global dvere_vahy_zamceno
     dvere_vahy_zamceno=1
     global vana_naplnena
     vana_naplnena=1
+    global susicka
+    susicka=1
     global pojistka
     pojistka=0
     global krb_plamen
     krb_plamen=0
     global hak_zlomeny
     hak_zlomeny=1
+    global wc
+    wc=1
+    global telo_rozrezane
+    telo_rozrezane=0
+    global krb_alkohol
+    krb_alkohol=0
     #Nutno dodělat některé přepínače
     OPT()
 def OPT():
@@ -302,6 +375,29 @@ def OPV():
     global zamek_gama_zamcen
     volba=input("Zadej příkaz:")
     volba=volba.lower()
+    #---------------------DEBUG----------------------
+    if "dbg_tutorial_skip" in volba:
+        NOVA_HRA()
+    if "dbg_op" in volba:
+        OPT()
+    if "dbg_kuchyne" in volba:
+        KUCHYNET()
+    if "dbg_koupelna" in volba:
+        KOUPELNAT()
+    if "dbg_herna" in volba:
+        HERNAT()
+    if "dbg_knihovna" in volba:
+        KNIHOVNAT()
+    if "dbg_loznice" in volba:
+        LOZNICET()
+    if "dbg_balkon" in volba:
+        BALKONT()
+    if "dbg_puda" in volba:
+        PUDAT()
+    if "dbg_inv" in volba:
+        volbaa=input("Zadej předmět:")
+        inventar.append(volbaa)
+    #------------------------------------------------
     if volba=="inventář" or volba=="inventar":
         print(inventar)
         OPV()
@@ -369,29 +465,6 @@ def OPV():
         if "tv" in volba or "televize" in volba:
             print("Televize se zapla. V televizi jsou zprávy o nedávných vraždách. Pachatele se nepodařilo nikdy najít, ale všechny oběti měly do dlaní vyřezaný kříž. Po chvíli se rozhodneš televizi vypnout.")
             OPV()
-        if "dveře" in volba:
-            if "hlavní" in volba:
-                if zamek_alfa_zamcen==1 or zamek_beta_zamcen==1 or zamek_gama_zamcen==1:
-                    print("Snažíš se dveře otevřít, ale je zamčeno.")
-                    OPV()
-                else:
-                    if "zbraň" in inventar:
-                        print("PLACEHOLDER_GOOD_ENDING")
-                        return
-                    else:
-                        print("PLACEHOLDER_BAD_ENDING")
-                        return
-            if "koupelna" in volba:
-                KOUPELNAT()
-            if "váhy" in volba:
-                if dvere_vahy_zamceno==1:
-                    print("Lomcuješ dveřmi, ale je zamčeno.")
-                    OPV()
-                else:
-                    HERNAT()
-            else:
-                print("To nějak nejde.")
-                OPV()
         if "hák" in volba:
             if "hák" in inventar:
                 if "gauč" in volba:
@@ -428,7 +501,7 @@ def OPV():
             if "alfa" in volba:
                 if "dveře" and "hlavní" in volba:
                     if zamek_alfa_zamcen==1:
-                        if "klíč(alfa)" in inventar:
+                        if "klíč(ALFA)" in inventar:
                             print("Odemkl jsi zámek 'ALFA'.")
                             zamek_alfa_zamcen=0
                             OPV()
@@ -444,7 +517,7 @@ def OPV():
             if "beta" in volba:
                 if "dveře" and "hlavní" in volba:
                     if zamek_beta_zamcen==1:
-                        if "klíč(beta)" in inventar:
+                        if "klíč(BETA)" in inventar:
                             print("Odemkl jsi zámek 'BETA'.")
                             zamek_beta_zamcen=0
                             OPV()
@@ -460,7 +533,7 @@ def OPV():
             if "gama" in volba:
                 if "dveře" and "hlavní" in volba:
                     if zamek_gama_zamcen==1:
-                        if "klíč(gama)" in inventar:
+                        if "klíč(GAMA)" in inventar:
                             print("Odemkl jsi zámek 'GAMA'.")
                             zamek_gama_zamcen=0
                             OPV()
@@ -473,8 +546,45 @@ def OPV():
                 else:
                     print("Tohle není zrovna ideální.")
                     OPV()
-        if "průchod" or "kuchyně" in volba:
+        if "průchod" in volba or "kuchyně" in volba:
             KUCHYNET()
+        if "skříň" in volba or "pojistky" in volba:
+            if "pojistka" in volba:
+                if "pojistka" in inventar:
+                    print("Umístil jsi pojistku na její místo.")
+                    inventar.remove("pojistka")
+                    pojistka=1
+                    OPV()
+                else:
+                    print("Nemáš žádnou pojistku.")
+                    OPV()
+            else:
+                print("Takhle to nefunguje.")
+                OPV()
+        elif "dveře" in volba:
+            if "hlavní" in volba:
+                if zamek_alfa_zamcen==1 or zamek_beta_zamcen==1 or zamek_gama_zamcen==1:
+                    print("Snažíš se dveře otevřít, ale je zamčeno.")
+                    OPV()
+                else:
+                    if "zbraň" in inventar:
+                        print("PLACEHOLDER_GOOD_ENDING")
+                        return
+                    else:
+                        print("PLACEHOLDER_BAD_ENDING")
+                        return
+            if "koupelna" in volba:
+                KOUPELNAT()
+            if "váhy" in volba:
+                if dvere_vahy_zamceno==1:
+                    print("Lomcuješ dveřmi, ale je zamčeno.")
+                    OPV()
+                else:
+                    HERNAT()
+            else:
+                print("To nějak nejde.")
+                OPV()
+        
         #Nutno dodělat předměty v inventáři
                         
     else:
@@ -490,6 +600,29 @@ def KUCHYNEV():
     global trezor_zamcen
     volba=input("Zadej příkaz:")
     volba=volba.lower()
+    #---------------------DEBUG----------------------
+    if "dbg_tutorial_skip" in volba:
+        NOVA_HRA()
+    if "dbg_op" in volba:
+        OPT()
+    if "dbg_kuchyne" in volba:
+        KUCHYNET()
+    if "dbg_koupelna" in volba:
+        KOUPELNAT()
+    if "dbg_herna" in volba:
+        HERNAT()
+    if "dbg_knihovna" in volba:
+        KNIHOVNAT()
+    if "dbg_loznice" in volba:
+        LOZNICET()
+    if "dbg_balkon" in volba:
+        BALKONT()
+    if "dbg_puda" in volba:
+        PUDAT()
+    if "dbg_inv" in volba:
+        volbaa=input("Zadej předmět:")
+        inventar.append(volbaa)
+    #------------------------------------------------
     if volba=="inventář" or volba=="inventar":
         print(inventar)
         KUCHYNEV()
@@ -553,4 +686,273 @@ def KUCHYNEV():
     else:
         print("Tento příkaz neznám.")
         BLANKV()
+#SC05 (Koupelna)
+def KOUPELNAT():
+    print("Vcházíš do něčeho, co by se dalo nazvat koupelnou.")
+    print("Co uděláš?")
+    KOUPELNAV()
+def KOUPELNAV():
+    global inventar
+    global vana_naplnena
+    global susicka
+    global wc
+    volba=input("Zadej příkaz:")
+    volba=volba.lower()
+    #---------------------DEBUG----------------------
+    if "dbg_tutorial_skip" in volba:
+        NOVA_HRA()
+    if "dbg_op" in volba:
+        OPT()
+    if "dbg_kuchyne" in volba:
+        KUCHYNET()
+    if "dbg_koupelna" in volba:
+        KOUPELNAT()
+    if "dbg_herna" in volba:
+        HERNAT()
+    if "dbg_knihovna" in volba:
+        KNIHOVNAT()
+    if "dbg_loznice" in volba:
+        LOZNICET()
+    if "dbg_balkon" in volba:
+        BALKONT()
+    if "dbg_puda" in volba:
+        PUDAT()
+    if "dbg_inv" in volba:
+        volbaa=input("Zadej předmět:")
+        inventar.append(volbaa)
+    #------------------------------------------------
+    if volba=="inventář" or volba=="inventar":
+        print(inventar)
+        KOUPELNAV()
+    if "prozkoumej" in volba:
+        if "místnost" in volba or "koupelna" in volba: 
+            print("Je to tmavá místnost. Všechna okna jsou zakrytá a vzduch je tu jako v prádelně. Hned za dveřmi v rohu se nachází stará pračka a sušička. Na sušičce svítí červená kontrolka. Za nimi se nachází rozbité umyvadlo. Naproti od tebe je vana a záchodová mísa do kterých od dveří nevidíš.")
+            KOUPELNAV()
+        if "pračka" in volba:
+            print("Stará pračka. Zespodu výrazně rezavá. Skrz okénko vepředu vidíš, že v ní nic není.")
+            KOUPELNAV()
+        if "sušička" in volba:
+            if susicka==1:
+                print("Stará, sotva funkční sušička. Na panelu svítí červená kontrolka.")
+                KOUPELNAV()
+            else:
+                print("Tahle sušička už nikdy sušit nebude...")
+                KOUPELNAV()
+        if "umyvadlo" in volba:
+            print("Rozbité umyvadlo, které rozhodně zažilo lepší časy. Ze zdi nad ním trčí olověná trubka, ze které pokapává rezavá voda.")
+            KOUPELNAV()
+        if "wc" in volba or "záchod" in volba or "toaleta" in volba:
+            if wc==1:
+                print("Špinavá toaletní mísa plná nechutné vody. Při bližším prozkoumání máš pocit že v té vodě něco vidíš.")
+                KOUPELNAV()
+            else:
+                print("Špinavá toaletní mísa. Odmítáš se na ni dívat déle než nezbytně musíš.")
+                KOUPELNAV()
+        if "vana" in volba:
+            if vana_naplnena==1:
+                print("Špinavá vana plná špinavé vody. Prostě fuj.")
+                KOUPELNAV()
+            else:
+                print("Prázdná vana. Pořád není nejčistší.")
+                KOUPELNAV()
+        if "dveře" in volba:
+            print("Dveře vedoucí zpět na chodbu.")
+            KOUPELNAV()
     
+        else:
+            print("Nevím jak to udělat")
+            KOUPELNAV()
+    if "použij" in volba:
+        if "dveře" in volba:
+            OPT2()
+        if "sušička" in volba:
+            if susicka==1:
+                print("Stisknul jsi tlačítko u červené kontrolky. Sušička se rozběhla a téměř okamžitě na to se z ní začal ozývat neuvěřitelný hluk. Poté co se zastavila (pravděpodobně nadobro) ses rozhodl ji otevřít. Uvnitř byla pojistka, kterou sis vzal.")
+                inventar.append("pojistka")
+                susicka=0
+                KOUPELNAV()
+            else:
+                print("Stisknul jsi tlačítko. Sušička nic neudělala.")
+                KOUPELNAV()
+        if "wc" in volba or "toaleta" in volba or "záchod" in volba:
+            if wc==1:
+                print("Zadržuješ dech, zatínáš zuby a noříš svoji ruku do odporné záchodové vody. Po chvílí pátrání nahmatáš nějaký objekt. Po vytažení se ukázalo že je to klíč. Nebo teda aspoň jeho polovina. Rozhodl ses si ji vzít.")
+                inventar.append("polovina klíče 'OMEGA'(A)")
+                wc=0
+                KOUPELNAV()
+            else:
+                print("Tam už rozhodně ruku znovu nestrčíš.")
+                KOUPELNAV()
+        if "vana" in volba:
+            if vana_naplnena==1:
+                print("Vytáhl jsi špunt u vany a po nějaké chvíli se všechna voda z vany vypustila. Na dně vany ležela malá vodotěsná svítilna. Po jejím vyzkoušení zjišťuješ, že v ní nejsou baterie, ale stejně si ji raději vezmeš.")
+                inventar.append("svítilna(bez baterií)")
+                vana_naplnena=0
+                KOUPELNAV()
+            else:
+                print("Už tu není co dělat.")
+                KOUPELNAV()
+        else:
+            print("To si nezvládnu.")
+    else:
+        print("Tento příkaz neznám.")
+        KOUPELNAV()
+    #nutno dodělat inventář
+#SC06 (Herna)
+def HERNAT():
+    print("Tato místnost se zdá byt herna.")
+    print("Co uděláš?")
+    HERNAV()
+def HERNAV():
+    global inventar
+    global krb_plamen
+    global telo_rozrezane
+    global krb_alkohol
+    volba=input("Zadej příkaz:")
+    volba=volba.lower()
+    #---------------------DEBUG----------------------
+    if "dbg_tutorial_skip" in volba:
+        NOVA_HRA()
+    if "dbg_op" in volba:
+        OPT()
+    if "dbg_kuchyne" in volba:
+        KUCHYNET()
+    if "dbg_koupelna" in volba:
+        KOUPELNAT()
+    if "dbg_herna" in volba:
+        HERNAT()
+    if "dbg_knihovna" in volba:
+        KNIHOVNAT()
+    if "dbg_loznice" in volba:
+        LOZNICET()
+    if "dbg_balkon" in volba:
+        BALKONT()
+    if "dbg_puda" in volba:
+        PUDAT()
+    if "dbg_inv" in volba:
+        volbaa=input("Zadej předmět:")
+        inventar.append(volbaa)
+    #------------------------------------------------
+    if volba=="inventář" or volba=="inventar":
+        print(inventar)
+        HERNAV()
+    if "prozkoumej" in volba:
+        if "místnost" in volba: 
+            print("Uprostřed místnosti se nachází masivní kulečníkový stůl, který už rozhodně zažil lepší časy. U vzdálenější stěny stojí překvapivě zachovalý krb. Hned za dveřmi u stěny je stojan na tága a za kulečníkem na zemi leží nějaký tmavý objekt, který nejsi schopný zcela rozeznat.")
+            HERNAV()
+        if "objekt" in volba:
+            print("Přiblížíš se k tmavému objektu a k tvému zděšení zjišťuješ že se jedná o lidské tělo.")
+            HERNAV()
+        if "tělo" in volba:
+            if telo_rozrezane==1:
+                print("Rozřezané tělo toho chudáka. Z toho co kdysi bývalo břicho teď vyhřezávají vnitřnosti a celou místnost plní nesnesitelný zápach.")
+                HERNAV()
+            else:
+                print("Proti veškerému svému odporu se přiblížíš k tělu abys ho prozkoumal. Jedná se o muže středního věku. Příčina smrti se zdá být předávkování, aspoň tak usuzuješ podle prázdných krabiček od léků poházených kolem. Na obou rukách má vypálené kříže. Po bližším ohledání zjišťuješ, že na břiše má nakreslený znak 'BETA'.")
+                HERNAV()
+        if "kulečník" in volba or "stůl" in volba:
+            if "polovina klíče 'OMEGA'(B)" in inventar or "klíč(OMEGA)" in inventar:
+                print("Masivní kulečníkový stůl. Pravděpodobně z počátku minulého století.")
+                HERNAV()
+            else:
+                print("Masivní kulečníkový stůl. Pravděpodobně z počátku minulého století. V jedné z děr se něco nachází.")
+                HERNAV()
+        if "díra" in volba:
+            print("V díře je něco co vypadá jako klíč, ale rukou se ti nedaří ho vytáhnout.")
+            HERNAV()
+        if "krb" in volba:
+            if krb_plamen==1:
+                print("Starý krb, ve kterém hoří mohutný plamen.")
+                HERNAV()
+            else:
+                print("Starý krb, ve kterém se pravděpodobně často topilo. Je v něm připraveno dřevo na podpal.")
+                HERNAV()
+        if "stojan" in volba:
+            if "tágo(zlomené)" in inventar or "hák(slepený)" in inventar:
+                print("Stojan na tága.")
+                HERNAV()
+            else:
+                print("Stojan na tága, ve kterém stojí jen jedno opuštěné zlomené tágo.")
+                HERNAV()
+    if "vezmi" in volba:
+        if "tágo" in volba:
+            if "tágo(zlomené)" in inventar or "hák(slepený)" in inventar:
+                print("Nic už tu není.")
+                HERNAV()
+            else:
+                print("Sebral jsi zlomené tágo.")
+                inventar.append("tágo(zlomené)")
+                HERNAV()
+        else:
+            print("Nevím jak to udělat.")
+            HERNAV()
+    if "použij" in volba:
+        if "dveře" in volba:
+            OPT2()
+        if "krb" in volba:
+            if krb_plamen==1:
+                if "papír" in volba:
+                    print("Díky žáru plamene se na papíře objevil text.")
+                    HERNAV()
+                else:
+                    print("To nepůjde.")
+                    HERNAV()
+            else:
+                if "alkohol" in volba:
+                    if "alkohol" in inventar:
+                        print("Nalil jsi na dřevo alkohol.")
+                        krb_alkohol=1
+                        inventar.remove("alkohol")
+                        HERNAV()
+                    else:
+                        print("Nemáš žádný alkohol.")
+                        HERNAV()
+                if "zapalovač" in volba:
+                    if "zapalovač" in inventar:
+                        if krb_alkohol==1:
+                            print("Zapálil jsi dřevo nasáklé alkoholem, které okamžitě vzplanulo.")
+                            krb_plamen=1
+                            HERNAV()
+                        else:
+                            print("Snažíš se dřevo v krbu zapálit, ale nedaří se ti to.")
+                            HERNAV()
+                    else:
+                        print("Nemáš zapalovač.")
+                        HERNAV()
+        if "kulečník" in volba or "stůl" in volba or "díra" in volba:
+            if "hák" in volba:
+                if "hák(zlomený)" in inventar or "hák(slepený)"  in inventar:
+                    if "klíč(OMEGA)" in inventar or "polovina klíče 'OMEGA'(B)" in inventar:
+                        print("Nic už tam není.")
+                        HERNAV()
+                    else:
+                        print("Vytáhl jsi z díry polovinu klíče.")
+                        inventar.append("polovina klíče 'OMEGA'(B)")
+                        HERNAV()
+                else:
+                    print("Nemáš žádný hák.")
+                    HERNAV()
+            else:
+                print("To není možné.")
+                HERNAV()
+        if "tělo" in volba:
+            if "nůž" in volba:
+                if "nůž(ostrý)" in inventar:
+                    if telo_rozrezane==0:
+                        print("S neuvěřitelným odporem vytahujeě svůj nůž a pomalu řežeě břicho mrtvého. Při prvním kontaktu nože se vyvalilo obrovské množství krve ale ty dále pokračuješ. Když se dostaneš k žaludku nacházíš klíč, který sis vzal.")
+                        inventar.append("klíč(BETA)")
+                        telo_rozrezane=1
+                        HERNAV()
+                    else:
+                        print("Už nemáš žádný důvod.")
+                        HERNAV()
+                else:
+                    print("Nemáš ostrý nůž.")
+                    HERNAV()
+            else:
+                print("To nezvládnu.")
+                HERNAV()
+        #Inventář dodělat
+    else:
+        print("Tento příkaz neznám.")
+        HERNAV()
