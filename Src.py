@@ -1,5 +1,9 @@
 import winsound
 import time
+def ENDING_GOOD():
+    print("PLACEHOLDER_GOOD_ENDING")
+def ENDING_BAD():
+    print("PLACEHOLDER_BAD_ENDING")
 """
 #INVENTAR
 if "prozkoumej" in volba:
@@ -22,49 +26,6 @@ if "prozkoumej" in volba:
         if "klíč(váhy)" in inventar:
             print("Klíč se znamením vah.")
             BLANKV()
-if "použij" in volba:
-    if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in volba:
-        if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in inventar:
-            print("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
-            inventar.remove("tágo(zlomené)")
-            inventar.remove("hák(zlomený)")
-            inventar.append("hák(prodloužený)")
-            BLANKV()
-        else:
-            print("Nemáš všechny materiály.")
-            BLANKV()
-    if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in volba:
-        if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in inventory:
-            print("Slepil jsi dohromady klíč(OMEGA)")
-            inventar.remove("polovina klíče 'OMEGA'(A)")
-            inventar.remove("polovina klíče 'OMEGA'(B)")
-            inventar.append("klíč(OMEGA)")
-            BLANKV()
-        else:
-            print("Něco ti chybí.")
-            BLANKV()
-    if "svítilna" in volba and "baterie" in volba:
-        if "svítilna" in inventar and "baterie" in inventar:
-            print("Vložil jsi baterie do svítilny.")
-            inventar.remove("svítilna(bez baterií)")
-            inventar.remove("baterie")
-            inventar.append("svítilna")
-            BLANKV()
-        else:
-            print("Tady něco schází.")
-            BLANKV()
-    if "nůž(tupý)" in volba and "brousek" in volba:
-        if "nůž(tupý)" in volba and "brousek" in inventar:
-            print("Naostřil jsi nůž.")
-            inventar.remove("nůž(tupý)")
-            inventar.append("nůž(ostrý")
-            BLANKV()
-        else:
-            print("Něco potřebuješ")
-            
-            
-else:
-        print("Tohle nebude fungovat")
 """
 #SC00_BLANK
 def BLANKT():
@@ -401,6 +362,9 @@ def SKLEP2V():
         SKLEP2V()
 #SC03 (Obývací pokoj)
 def NOVA_HRA():
+    ###
+    winsound.PlaySound("sound/hit.wav", winsound.SND_ASYNC)
+    ###
     global inventar
     inventar=[]
     global zamek_alfa_zamcen
@@ -489,6 +453,13 @@ def OPV():
         print(inventar)
         OPV()
     if "prozkoumej" in volba:
+        if "papír" in volba:
+            if "papír(citronový)" in inventar:
+                print("Prázdný papír vonící po citrónu.")
+                OPV()
+            if "papír(vzkaz)" in inventar:
+                print("Na papíře je vzkaz hnědým písmem: '232.8°C'")
+                OPV()
         if "místnost" in volba: 
             print("Nacházíš se v něčem co připomíná obývací pokoj. Naproti gauči se nachází velká televize. Za gaučem je potom schodiště vedoucí nahoru a pod schodištěm na stěně se nachází pojistková skříň. Naproti pojistkové skříni je polička s fotkami a vyhořelými svíčkami. Pokoj je spojený s chodbou, ve které jsou troje dveře. Jedny s nápisem 'Koupelna', druhé se znakem vah a hlavní dveře. Dále jde z pokoje průchod do kuchyně.")
             OPV()
@@ -549,7 +520,7 @@ def OPV():
         OPV()
     if "použij" in volba:
         if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in volba:
-            if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in inventar:
+            if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
                 print("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -558,18 +529,18 @@ def OPV():
             else:
                 print("Nemáš všechny materiály.")
                 OPV()
-        if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in volba:
-            if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in inventar:
-                print("Slepil jsi dohromady klíč(OMEGA)")
-                inventar.remove("polovina klíče 'OMEGA'(A)")
-                inventar.remove("polovina klíče 'OMEGA'(B)")
-                inventar.append("klíč(OMEGA)")
+        if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
+            if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
+                print("Slepil jsi dohromady klíč(GAMA)")
+                inventar.remove("polovina klíče GAMA(A)")
+                inventar.remove("polovina klíče GAMA(B)")
+                inventar.append("klíč(GAMA)")
                 OPV()
             else:
                 print("Něco ti chybí.")
                 OPV()
         if "svítilna" in volba and "baterie" in volba:
-            if "svítilna" in inventar and "baterie" in inventar:
+            if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
                 print("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -579,10 +550,10 @@ def OPV():
                 print("Tady něco schází.")
                 OPV()
         if "nůž(tupý)" in volba and "brousek" in volba:
-            if "nůž(tupý)" in volba and "brousek" in inventar:
+            if "nůž(tupý)" in inventar and "brousek" in inventar:
                 print("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
-                inventar.append("nůž(ostrý")
+                inventar.append("nůž(ostrý)")
                 OPV()
             else:
                 print("Něco potřebuješ")
@@ -591,7 +562,7 @@ def OPV():
             print("Televize se zapla. V televizi jsou zprávy o nedávných vraždách. Pachatele se nepodařilo nikdy najít, ale všechny oběti měly do dlaní vyřezaný kříž. Po chvíli se rozhodneš televizi vypnout.")
             OPV()
         if "hák" in volba:
-            if "hák" in inventar:
+            if "hák(zlomený)" in inventar or "hák(prodloužený)" in inventar:
                 if "gauč" in volba:
                     if "klíč(váhy)" in inventar:
                         print("Nic jiného už jsi nenašel")
@@ -693,11 +664,9 @@ def OPV():
                     OPV()
                 else:
                     if "zbraň" in inventar:
-                        print("PLACEHOLDER_GOOD_ENDING")
-                        return
+                        ENDING_GOOD()
                     else:
-                        print("PLACEHOLDER_BAD_ENDING")
-                        return
+                        ENDING_BAD()
             if "koupelna" in volba:
                 KOUPELNAT()
             if "váhy" in volba:
@@ -760,6 +729,13 @@ def KUCHYNEV():
         print(inventar)
         KUCHYNEV()
     if "prozkoumej" in volba:
+        if "papír" in volba:
+            if "papír(citronový)" in inventar:
+                print("Prázdný papír vonící po citrónu.")
+                KUCHYNEV()
+            if "papír(vzkaz)" in inventar:
+                print("Na papíře je vzkaz hnědým písmem: '232.8°C'")
+                KUCHYNEV()
         if "místnost" in volba or "kuchyně" in volba: 
             print("Uprostřed kuchyně se nachází velký jídelní stůl a podél jedné stěny se táhne kuchyňská linka na které leží tupý nůž. Tvoji pozornost ale upoutal trezor který leží na stole.")
             KUCHYNEV()
@@ -797,7 +773,7 @@ def KUCHYNEV():
             KUCHYNEV()
     if "použij" in volba:
         if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in volba:
-            if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in inventar:
+            if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
                 print("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -806,18 +782,18 @@ def KUCHYNEV():
             else:
                 print("Nemáš všechny materiály.")
                 KUCHYNEV()
-        if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in volba:
-            if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in inventar:
-                print("Slepil jsi dohromady klíč(OMEGA)")
-                inventar.remove("polovina klíče 'OMEGA'(A)")
-                inventar.remove("polovina klíče 'OMEGA'(B)")
-                inventar.append("klíč(OMEGA)")
+        if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
+            if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
+                print("Slepil jsi dohromady klíč(GAMA)")
+                inventar.remove("polovina klíče GAMA(A)")
+                inventar.remove("polovina klíče GAMA(B)")
+                inventar.append("klíč(GAMA)")
                 KUCHYNEV()
             else:
                 print("Něco ti chybí.")
                 KUCHYNEV()
         if "svítilna" in volba and "baterie" in volba:
-            if "svítilna" in inventar and "baterie" in inventar:
+            if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
                 print("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -827,10 +803,10 @@ def KUCHYNEV():
                 print("Tady něco schází.")
                 KUCHYNEV()
         if "nůž(tupý)" in volba and "brousek" in volba:
-            if "nůž(tupý)" in volba and "brousek" in inventar:
+            if "nůž(tupý)" in inventar and "brousek" in inventar:
                 print("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
-                inventar.append("nůž(ostrý")
+                inventar.append("nůž(ostrý)")
                 KUCHYNEV()
             else:
                 print("Něco potřebuješ")
@@ -844,7 +820,7 @@ def KUCHYNEV():
                 C3=int(input("Třetí číslo:"))
                 C4=int(input("Čtvrté číslo:"))
                 if C1==6 and C2==8 and C3==3 and C4==1:
-                    trezor_zamcen==0
+                    trezor_zamcen=0
                     print("Trezor se otevřel. Uvnitř byla... Izolepa? Vzal sis ji k sobě.")
                     inventar.append("izolepa")
                     KUCHYNEV()
@@ -857,7 +833,7 @@ def KUCHYNEV():
     #Chybí dodělat věci v inventáři
     else:
         print("Tento příkaz neznám.")
-        BLANKV()
+        KUCHYNEV()
 #SC05 (Koupelna)
 def KOUPELNAT():
     print("Vcházíš do něčeho, co by se dalo nazvat koupelnou.")
@@ -899,6 +875,13 @@ def KOUPELNAV():
         print(inventar)
         KOUPELNAV()
     if "prozkoumej" in volba:
+        if "papír" in volba:
+            if "papír(citronový)" in inventar:
+                print("Prázdný papír vonící po citrónu.")
+                KOUPELNAV()
+            if "papír(vzkaz)" in inventar:
+                print("Na papíře je vzkaz hnědým písmem: '232.8°C'")
+                KOUPELNAV()
         if "místnost" in volba or "koupelna" in volba: 
             print("Je to tmavá místnost. Všechna okna jsou zakrytá a vzduch je tu jako v prádelně. Hned za dveřmi v rohu se nachází stará pračka a sušička. Na sušičce svítí červená kontrolka. Za nimi se nachází rozbité umyvadlo. Naproti od tebe je vana a záchodová mísa do kterých od dveří nevidíš.")
             KOUPELNAV()
@@ -938,7 +921,7 @@ def KOUPELNAV():
             KOUPELNAV()
     if "použij" in volba:
         if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in volba:
-            if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in inventar:
+            if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
                 print("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -947,18 +930,18 @@ def KOUPELNAV():
             else:
                 print("Nemáš všechny materiály.")
                 KOUPELNAV()
-        if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in volba:
-            if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in inventar:
-                print("Slepil jsi dohromady klíč(OMEGA)")
-                inventar.remove("polovina klíče 'OMEGA'(A)")
-                inventar.remove("polovina klíče 'OMEGA'(B)")
-                inventar.append("klíč(OMEGA)")
+        if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
+            if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
+                print("Slepil jsi dohromady klíč(GAMA)")
+                inventar.remove("polovina klíče GAMA(A)")
+                inventar.remove("polovina klíče GAMA(B)")
+                inventar.append("klíč(GAMA)")
                 KOUPELNAV()
             else:
                 print("Něco ti chybí.")
                 KOUPELNAV()
         if "svítilna" in volba and "baterie" in volba:
-            if "svítilna" in inventar and "baterie" in inventar:
+            if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
                 print("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -968,10 +951,10 @@ def KOUPELNAV():
                 print("Tady něco schází.")
                 KOUPELNAV()
         if "nůž(tupý)" in volba and "brousek" in volba:
-            if "nůž(tupý)" in volba and "brousek" in inventar:
+            if "nůž(tupý)" in inventar and "brousek" in inventar:
                 print("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
-                inventar.append("nůž(ostrý")
+                inventar.append("nůž(ostrý)")
                 KOUPELNAV()
             else:
                 print("Něco potřebuješ")
@@ -990,7 +973,7 @@ def KOUPELNAV():
         if "wc" in volba or "toaleta" in volba or "záchod" in volba:
             if wc==1:
                 print("Zadržuješ dech, zatínáš zuby a noříš svoji ruku do odporné záchodové vody. Po chvílí pátrání nahmatáš nějaký objekt. Po vytažení se ukázalo že je to klíč. Nebo teda aspoň jeho polovina. Rozhodl ses si ji vzít.")
-                inventar.append("polovina klíče 'OMEGA'(A)")
+                inventar.append("polovina klíče GAMA(A)")
                 wc=0
                 KOUPELNAV()
             else:
@@ -1051,6 +1034,13 @@ def HERNAV():
         print(inventar)
         HERNAV()
     if "prozkoumej" in volba:
+        if "papír" in volba:
+            if "papír(citronový)" in inventar:
+                print("Prázdný papír vonící po citrónu.")
+                HERNAV()
+            if "papír(vzkaz)" in inventar:
+                print("Na papíře je vzkaz hnědým písmem: '232.8°C'")
+                HERNAV()
         if "místnost" in volba: 
             print("Uprostřed místnosti se nachází masivní kulečníkový stůl, který už rozhodně zažil lepší časy. U vzdálenější stěny stojí překvapivě zachovalý krb. Hned za dveřmi u stěny je stojan na tága a za kulečníkem na zemi leží nějaký tmavý objekt, který nejsi schopný zcela rozeznat.")
             HERNAV()
@@ -1065,7 +1055,7 @@ def HERNAV():
                 print("Proti veškerému svému odporu se přiblížíš k tělu abys ho prozkoumal. Jedná se o muže středního věku. Příčina smrti se zdá být předávkování, aspoň tak usuzuješ podle prázdných krabiček od léků poházených kolem. Na obou rukách má vypálené kříže. Po bližším ohledání zjišťuješ, že na břiše má nakreslený znak 'BETA'.")
                 HERNAV()
         if "kulečník" in volba or "stůl" in volba:
-            if "polovina klíče 'OMEGA'(B)" in inventar or "klíč(OMEGA)" in inventar:
+            if "polovina klíče GAMA(B)" in inventar or "klíč(GAMA)" in inventar:
                 print("Masivní kulečníkový stůl. Pravděpodobně z počátku minulého století.")
                 HERNAV()
             else:
@@ -1102,7 +1092,7 @@ def HERNAV():
             HERNAV()
     if "použij" in volba:
         if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in volba:
-            if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in inventar:
+            if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
                 print("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -1111,18 +1101,18 @@ def HERNAV():
             else:
                 print("Nemáš všechny materiály.")
                 HERNAV()
-        if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in volba:
-            if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in inventar:
-                print("Slepil jsi dohromady klíč(OMEGA)")
-                inventar.remove("polovina klíče 'OMEGA'(A)")
-                inventar.remove("polovina klíče 'OMEGA'(B)")
-                inventar.append("klíč(OMEGA)")
+        if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
+            if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
+                print("Slepil jsi dohromady klíč(GAMA)")
+                inventar.remove("polovina klíče GAMA(A)")
+                inventar.remove("polovina klíče GAMA(B)")
+                inventar.append("klíč(GAMA)")
                 HERNAV()
             else:
                 print("Něco ti chybí.")
                 HERNAV()
         if "svítilna" in volba and "baterie" in volba:
-            if "svítilna" in inventar and "baterie" in inventar:
+            if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
                 print("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -1132,10 +1122,10 @@ def HERNAV():
                 print("Tady něco schází.")
                 HERNAV()
         if "nůž(tupý)" in volba and "brousek" in volba:
-            if "nůž(tupý)" in volba and "brousek" in inventar:
+            if "nůž(tupý)" in inventar and "brousek" in inventar:
                 print("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
-                inventar.append("nůž(ostrý")
+                inventar.append("nůž(ostrý)")
                 HERNAV()
             else:
                 print("Něco potřebuješ")
@@ -1185,12 +1175,12 @@ def HERNAV():
         if "kulečník" in volba or "stůl" in volba or "díra" in volba:
             if "hák" in volba:
                 if "hák(zlomený)" in inventar or "hák(prodloužený)"  in inventar:
-                    if "klíč(OMEGA)" in inventar or "polovina klíče 'OMEGA'(B)" in inventar:
+                    if "klíč(GAMA)" in inventar or "polovina klíče GAMA(B)" in inventar:
                         print("Nic už tam není.")
                         HERNAV()
                     else:
                         print("Vytáhl jsi z díry polovinu klíče.")
-                        inventar.append("polovina klíče 'OMEGA'(B)")
+                        inventar.append("polovina klíče GAMA(B)")
                         HERNAV()
                 else:
                     print("Nemáš žádný hák.")
@@ -1260,6 +1250,13 @@ def CHODBAV():
         print(inventar)
         CHODBAV()
     if "prozkoumej" in volba:
+        if "papír" in volba:
+            if "papír(citronový)" in inventar:
+                print("Prázdný papír vonící po citrónu.")
+                CHODBAV()
+            if "papír(vzkaz)" in inventar:
+                print("Na papíře je vzkaz hnědým písmem: '232.8°C'")
+                CHODBAV()
         if "místnost" in volba: 
             print("Nacházíš se v podlouhlé chodbě. Na stěně naproti schodišti visí staré kukačky. Nalevo od nich jsou dveře vedoucí na balkón a okno proražené větví. Napravo jsou dvoje dveře. Jedny na sobě mají znak berana, ty druhé vedou do ložnice. Na stropě mezi těmito dveřmi je poklop s otvorem na otevření.")
             CHODBAV()
@@ -1275,7 +1272,7 @@ def CHODBAV():
             CHODBAV()
     if "použij" in volba:
         if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in volba:
-            if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in inventar:
+            if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
                 print("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -1284,18 +1281,18 @@ def CHODBAV():
             else:
                 print("Nemáš všechny materiály.")
                 CHODBAV()
-        if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in volba:
-            if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in inventar:
-                print("Slepil jsi dohromady klíč(OMEGA)")
-                inventar.remove("polovina klíče 'OMEGA'(A)")
-                inventar.remove("polovina klíče 'OMEGA'(B)")
-                inventar.append("klíč(OMEGA)")
+        if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
+            if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
+                print("Slepil jsi dohromady klíč(GAMA)")
+                inventar.remove("polovina klíče GAMA(A)")
+                inventar.remove("polovina klíče GAMA(B)")
+                inventar.append("klíč(GAMA)")
                 CHODBAV()
             else:
                 print("Něco ti chybí.")
                 CHODBAV()
         if "svítilna" in volba and "baterie" in volba:
-            if "svítilna" in inventar and "baterie" in inventar:
+            if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
                 print("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -1305,10 +1302,10 @@ def CHODBAV():
                 print("Tady něco schází.")
                 CHODBAV()
         if "nůž(tupý)" in volba and "brousek" in volba:
-            if "nůž(tupý)" in volba and "brousek" in inventar:
+            if "nůž(tupý)" in inventar and "brousek" in inventar:
                 print("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
-                inventar.append("nůž(ostrý")
+                inventar.append("nůž(ostrý)")
                 CHODBAV()
             else:
                 print("Něco potřebuješ")
@@ -1410,6 +1407,13 @@ def LOZNICEV():
         print(inventar)
         LOZNICEV()
     if "prozkoumej" in volba:
+        if "papír" in volba:
+            if "papír(citronový)" in inventar:
+                print("Prázdný papír vonící po citrónu.")
+                LOZNICEV()
+            if "papír(vzkaz)" in inventar:
+                print("Na papíře je vzkaz hnědým písmem: '232.8°C'")
+                LOZNICEV()
         if "místnost" in volba: 
             print("Celkem velká ložnice. Nalevo od vchodu je vitrína s modely letadel a šuplíky pod nimi. Naproti tobě pak leží rozbité hodiny. Napravo od vchodu je postel a noční stolek.")
             LOZNICEV()
@@ -1467,7 +1471,7 @@ def LOZNICEV():
             LOZNICEV()
     if "použij" in volba:
         if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in volba:
-            if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in inventar:
+            if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
                 print("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -1476,18 +1480,18 @@ def LOZNICEV():
             else:
                 print("Nemáš všechny materiály.")
                 LOZNICEV()
-        if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in volba:
-            if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in inventar:
-                print("Slepil jsi dohromady klíč(OMEGA)")
-                inventar.remove("polovina klíče 'OMEGA'(A)")
-                inventar.remove("polovina klíče 'OMEGA'(B)")
-                inventar.append("klíč(OMEGA)")
+        if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
+            if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
+                print("Slepil jsi dohromady klíč(GAMA)")
+                inventar.remove("polovina klíče GAMA(A)")
+                inventar.remove("polovina klíče GAMA(B)")
+                inventar.append("klíč(GAMA)")
                 LOZNICEV()
             else:
                 print("Něco ti chybí.")
                 LOZNICEV()
         if "svítilna" in volba and "baterie" in volba:
-            if "svítilna" in inventar and "baterie" in inventar:
+            if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
                 print("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -1497,10 +1501,10 @@ def LOZNICEV():
                 print("Tady něco schází.")
                 LOZNICEV()
         if "nůž(tupý)" in volba and "brousek" in volba:
-            if "nůž(tupý)" in volba and "brousek" in inventar:
+            if "nůž(tupý)" in inventar and "brousek" in inventar:
                 print("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
-                inventar.append("nůž(ostrý")
+                inventar.append("nůž(ostrý)")
                 LOZNICEV()
             else:
                 print("Něco potřebuješ")
@@ -1549,6 +1553,13 @@ def KNIHOVNAV():
         print(inventar)
         KNIHOVNAV()
     if "prozkoumej" in volba:
+        if "papír" in volba:
+            if "papír(citronový)" in inventar:
+                print("Prázdný papír vonící po citrónu.")
+                KNIHOVNAV()
+            if "papír(vzkaz)" in inventar:
+                print("Na papíře je vzkaz hnědým písmem: '232.8°C'")
+                KNIHOVNAV()
         if "místnost" in volba: 
             print("Pravděpodobně často používaná knihovna/pracovna. Naproti dveří je stůl s počítačem obklopený knihovnami po obou stranách.")
             KNIHOVNAV()
@@ -1563,14 +1574,14 @@ def KNIHOVNAV():
                 print("Zapnutý počítač. Na obrazovce je kolonka pro heslo a pod ní text: 'W. Shakespeare 1603'")
                 KNIHOVNAV()
             else:
-                print("Na obrazovce je fotka trezoru s popiskem: R. 'Smithova *++*' a fotka trezoru")
+                print("Na obrazovce je fotka trezoru s popiskem: R. 'Smithova *++*'.")
                 KNIHOVNAV()
         if "vzkaz" in volba or "lístek" in volba:
             print("Na lístku je napsáno : 'Dobrotivý bůh se neohlíží na naše omyly, jestliže způsobují věci, které sami nemůžeme poznat.' a obrázek znaku 'alfa'")
             KNIHOVNAV()          
     if "použij" in volba:
         if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in volba:
-            if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in inventar:
+            if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
                 print("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -1579,18 +1590,18 @@ def KNIHOVNAV():
             else:
                 print("Nemáš všechny materiály.")
                 KNIHOVNAV()
-        if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in volba:
-            if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in inventar:
-                print("Slepil jsi dohromady klíč(OMEGA)")
-                inventar.remove("polovina klíče 'OMEGA'(A)")
-                inventar.remove("polovina klíče 'OMEGA'(B)")
-                inventar.append("klíč(OMEGA)")
+        if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
+            if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
+                print("Slepil jsi dohromady klíč(GAMA)")
+                inventar.remove("polovina klíče GAMA(A)")
+                inventar.remove("polovina klíče GAMA(B)")
+                inventar.append("klíč(GAMA)")
                 KNIHOVNAV()
             else:
                 print("Něco ti chybí.")
                 KNIHOVNAV()
         if "svítilna" in volba and "baterie" in volba:
-            if "svítilna" in inventar and "baterie" in inventar:
+            if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
                 print("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -1600,10 +1611,10 @@ def KNIHOVNAV():
                 print("Tady něco schází.")
                 KNIHOVNAV()
         if "nůž(tupý)" in volba and "brousek" in volba:
-            if "nůž(tupý)" in volba and "brousek" in inventar:
+            if "nůž(tupý)" in inventar and "brousek" in inventar:
                 print("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
-                inventar.append("nůž(ostrý")
+                inventar.append("nůž(ostrý)")
                 KNIHOVNAV()
             else:
                 print("Něco potřebuješ")
@@ -1682,6 +1693,13 @@ def BALKONV():
         print(inventar)
         BALKONV()
     if "prozkoumej" in volba:
+        if "papír" in volba:
+            if "papír(citronový)" in inventar:
+                print("Prázdný papír vonící po citrónu.")
+                BALKONV()
+            if "papír(vzkaz)" in inventar:
+                print("Na papíře je vzkaz hnědým písmem: '232.8°C'")
+                BALKONV()
         if "místnost" in volba or "balkón" in volba or "balkon" in volba:
             if "hák(zlomený)" in inventar or "hák(prodloužený)" in inventar:
                 print("Nacházíš se na balkóně. Je tu sice hezký výhled, ale jinak tu skoro nic není. Ze starého okapu teče voda, možná je ucpaný. Dveře blokuje větev po které ses sem dostal.")
@@ -1726,7 +1744,7 @@ def BALKONV():
             BALKONV()
     if "použij" in volba:
         if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in volba:
-            if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in inventar:
+            if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
                 print("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -1735,18 +1753,18 @@ def BALKONV():
             else:
                 print("Nemáš všechny materiály.")
                 BALKONV()
-        if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in volba:
-            if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in inventar:
-                print("Slepil jsi dohromady klíč(OMEGA)")
-                inventar.remove("polovina klíče 'OMEGA'(A)")
-                inventar.remove("polovina klíče 'OMEGA'(B)")
-                inventar.append("klíč(OMEGA)")
+        if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
+            if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
+                print("Slepil jsi dohromady klíč(GAMA)")
+                inventar.remove("polovina klíče GAMA(A)")
+                inventar.remove("polovina klíče GAMA(B)")
+                inventar.append("klíč(GAMA)")
                 BALKONV()
             else:
                 print("Něco ti chybí.")
                 BALKONV()
         if "svítilna" in volba and "baterie" in volba:
-            if "svítilna" in inventar and "baterie" in inventar:
+            if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
                 print("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -1756,10 +1774,10 @@ def BALKONV():
                 print("Tady něco schází.")
                 BALKONV()
         if "nůž(tupý)" in volba and "brousek" in volba:
-            if "nůž(tupý)" in volba and "brousek" in inventar:
+            if "nůž(tupý)" in inventar and "brousek" in inventar:
                 print("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
-                inventar.append("nůž(ostrý")
+                inventar.append("nůž(ostrý)")
                 BALKONV()
             else:
                 print("Něco potřebuješ")
@@ -1849,6 +1867,13 @@ def PUDAV():
         
         else:
             if "prozkoumej" in volba:
+                if "papír" in volba:
+                    if "papír(citronový)" in inventar:
+                        print("Prázdný papír vonící po citrónu.")
+                        PUDAV()
+                    if "papír(vzkaz)" in inventar:
+                        print("Na papíře je vzkaz hnědým písmem: '232.8°C'")
+                        PUDAV()
                 if "místnost" in volba: 
                     print("Tahle půda už zažila lepší časy. V celé mísnosti je znatelný zápach alkoholu. Napravo od poklopu se nachází regál se všemi možnými typy alkoholu. Nalevo od poklopu se pak nachází masivní železná skříň a napravo od ní je nástěnka s jediným papírem.")
                     PUDAV()
@@ -1877,6 +1902,14 @@ def PUDAV():
                         print("Vzal sis k sobě papír.")
                         inventar.append("papír(citronový)")
                         PUDAV()
+                if "alkohol" in volba:
+                    if "alkohol" in inventar:
+                        print("Alkohol už u sebe máš.")
+                        PUDAV()
+                    else:
+                        print("Vzal sis k sobě láhev pálenky.")
+                        inventar.append("alkohol")
+                        PUDAV()
                 else:
                     print("Nevím jak to udělat")
                     PUDAV()
@@ -1884,7 +1917,7 @@ def PUDAV():
                 if "poklop" in volba or "dveře" in volba:
                     CHODBAT()
                 if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in volba:
-                    if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in inventar:
+                    if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
                         print("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                         inventar.remove("tágo(zlomené)")
                         inventar.remove("hák(zlomený)")
@@ -1893,18 +1926,18 @@ def PUDAV():
                     else:
                         print("Nemáš všechny materiály.")
                         PUDAV()
-                if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in volba:
-                    if "lepidlo" in volba and "polovina klíče 'OMEGA'(A)" in volba and "polovina klíče 'OMEGA'(B)" in inventar:
-                        print("Slepil jsi dohromady klíč(OMEGA)")
-                        inventar.remove("polovina klíče 'OMEGA'(A)")
-                        inventar.remove("polovina klíče 'OMEGA'(B)")
-                        inventar.append("klíč(OMEGA)")
+                if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
+                    if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
+                        print("Slepil jsi dohromady klíč(GAMA)")
+                        inventar.remove("polovina klíče GAMA(A)")
+                        inventar.remove("polovina klíče GAMA(B)")
+                        inventar.append("klíč(GAMA)")
                         PUDAV()
                     else:
                         print("Něco ti chybí.")
                         PUDAV()
                 if "svítilna" in volba and "baterie" in volba:
-                    if "svítilna" in inventar and "baterie" in inventar:
+                    if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
                         print("Vložil jsi baterie do svítilny.")
                         inventar.remove("svítilna(bez baterií)")
                         inventar.remove("baterie")
@@ -1914,13 +1947,29 @@ def PUDAV():
                         print("Tady něco schází.")
                         PUDAV()
                 if "nůž(tupý)" in volba and "brousek" in volba:
-                    if "nůž(tupý)" in volba and "brousek" in inventar:
+                    if "nůž(tupý)" in inventar and "brousek" in inventar:
                         print("Naostřil jsi nůž.")
                         inventar.remove("nůž(tupý)")
-                        inventar.append("nůž(ostrý")
+                        inventar.append("nůž(ostrý)")
                         PUDAV()
                     else:
                         print("Něco potřebuješ")
+                        PUDAV()
+                if "skříň" in volba:
+                    if skrin==0:
+                        A=input("První číslo:")
+                        B=input("Druhé číslo:")
+                        C=input("Třetí číslo:")
+                        if A=="4" and B=="5" and C=="1":
+                            print("Skříň se otevřela a v ní byl brousek, který sis vzal.")
+                            inventar.append("brousek")
+                            skrin=1
+                            PUDAV()
+                        else:
+                            print("Nic se nestalo...")
+                            PUDAV()
+                    else:
+                        print("Skříň je otevřená...")
                         PUDAV()
             else:
                 print("Tento příkaz neznám.")
