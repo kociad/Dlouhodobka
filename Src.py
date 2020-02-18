@@ -1,4 +1,4 @@
-import winsound
+#import winsound
 import time
 def ENDING_GOOD():
     print("PLACEHOLDER_GOOD_ENDING")
@@ -95,7 +95,7 @@ def BLANKV():
         BLANKV()
 #SC01 (SKLEP TMA)
 def SKLEP1T():
-    winsound.PlaySound("sound/basement.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+    #winsound.PlaySound("sound/basement.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
     print("Vítej do mojí hry! Pro provedení akce piš do příkazové řádky. Hra má tři hlavní akce: 'Prozkoumej' 'Vezmi' a 'Použij'. Svůj inventář si prohlédneš příkazem 'inventář'. Tyto akce kombinuj s předměty v herním světě nebo v inventáři. Objekty piš vždy v prvním pádě (hlavu=hlava atd.). Pojďme si to vyzkoušet v tomto úvodu.")
     print("Probouzíš se v chladné a vlhké místnosti. Vzadu na hlavě cítíš ostrou bolest. Tvé ruce jsou svázáné, ale naštěstí cítíš v kapse svůj věrný nůž.")
     print("Co uděláš?")
@@ -191,10 +191,10 @@ def SKLEP1V():
         if "nůž" in volba:
             if svazan==1:
                 if "provaz" in volba or "provazy" in volba:
-                    winsound.PlaySound("sound/rope.wav", winsound.SND_ASYNC)
+                    #winsound.PlaySound("sound/rope.wav", winsound.SND_ASYNC)
                     time.sleep(13)
                     print("Podařilo se ti provazy přeříznout. Nyní jsi volný.")
-                    winsound.PlaySound("sound/basement.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+                    #winsound.PlaySound("sound/basement.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
                     svazan=0
                     SKLEP1V()
                 else:
@@ -212,7 +212,7 @@ def SKLEP1V():
                 print("Jsi svázaný, nedokážeš se k tlačítku dostat a stisknout ho.")
                 SKLEP1V()
             else:
-                winsound.PlaySound("sound/switch.wav", winsound.SND_ASYNC)
+                #winsound.PlaySound("sound/switch.wav", winsound.SND_ASYNC)
                 time.sleep(1)
                 SKLEP2T()
                 svetlo=1
@@ -223,7 +223,7 @@ def SKLEP1V():
         SKLEP1V()
 #SC02 (SKLEP SVĚTLO)
 def SKLEP2T():
-    winsound.PlaySound("sound/basement.wav",winsound.SND_ASYNC | winsound.SND_LOOP)
+    #winsound.PlaySound("sound/basement.wav",winsound.SND_ASYNC | winsound.SND_LOOP)
     print("Místnost zalilo světlo. Kolem sebe vidíš něco co by mohl být sklep.")
     print("Co uděláš?")
     global stul
@@ -318,9 +318,9 @@ def SKLEP2V():
                 print("Nic jiného už tam není")
                 SKLEP2V()
             else:
-                winsound.PlaySound("sound/blanket.wav",winsound.SND_ASYNC)
+                #winsound.PlaySound("sound/blanket.wav",winsound.SND_ASYNC)
                 time.sleep(1)
-                winsound.PlaySound("sound/basement.wav",winsound.SND_ASYNC | winsound.SND_LOOP)
+                #winsound.PlaySound("sound/basement.wav",winsound.SND_ASYNC | winsound.SND_LOOP)
                 print("Pod dekou byl klíč který sis vzal")
                 inventar.append("klíč")
                 SKLEP2V()
@@ -330,16 +330,16 @@ def SKLEP2V():
         if "dveře" in volba:
             if dvereopen==1:
                 print("Vycházíš z tmavého sklepení. Ve chvíli kdy vyjdeš schody ucítíš na svém zátylku ostrou bolest. Upadáš na zem a téměř okamžitě ztrácíš vědomí.")
-                winsound.PlaySound(None, winsound.SND_ASYNC)
-                winsound.PlaySound("sound/hit.wav", winsound.SND_ASYNC)
+                #winsound.PlaySound(None, winsound.SND_ASYNC)
+                #winsound.PlaySound("sound/hit.wav", winsound.SND_ASYNC)
                 time.sleep(1)
-                winsound.PlaySound("sound/thud.wav",winsound.SND_ASYNC)
+                #winsound.PlaySound("sound/thud.wav",winsound.SND_ASYNC)
                 NOVA_HRA()
             elif "tyč" in volba:
                 if "tyč" in inventar:
-                    winsound.PlaySound("sound/door_break.wav",winsound.SND_ASYNC)
+                    #winsound.PlaySound("sound/door_break.wav",winsound.SND_ASYNC)
                     time.sleep(2)
-                    winsound.PlaySound("sound/basement.wav",winsound.SND_ASYNC | winsound.SND_LOOP)
+                    #winsound.PlaySound("sound/basement.wav",winsound.SND_ASYNC | winsound.SND_LOOP)
                     print("Vypáčil jsi dveře")
                     dvereopen=1
                     inventar.remove("tyč")
@@ -363,7 +363,7 @@ def SKLEP2V():
 #SC03 (Obývací pokoj)
 def NOVA_HRA():
     ###
-    winsound.PlaySound("sound/hit.wav", winsound.SND_ASYNC)
+    #winsound.PlaySound("sound/hit.wav", winsound.SND_ASYNC)
     ###
     global inventar
     inventar=[]
