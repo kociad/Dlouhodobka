@@ -7,8 +7,10 @@ first_launch=0
 
 def ENDING_GOOD():
     print("PLACEHOLDER_GOOD_ENDING")
+    
 def ENDING_BAD():
     print("PLACEHOLDER_BAD_ENDING")
+    
 def PRINT():
     global t
     global first_launch
@@ -24,6 +26,8 @@ def PRINT():
         text.update()
     text.insert(END, "\n\n")
     text.config(state=DISABLED)
+    wolba.focus()
+    
 #SC00_BLANK
 def BLANKT():
     print("PLACEHOLDER") #Úvodní text scény
@@ -93,6 +97,7 @@ def BLANKV():
         BLANKV()
 #SC01 (SKLEP TMA)
 def SKLEP1T():
+    start.pack_forget()
     global t
     winsound.PlaySound("sound/basement.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
     t="Vítej do mojí hry! Pro provedení akce piš do příkazové řádky. Hra má tři hlavní akce: 'Prozkoumej' 'Vezmi' a 'Použij'. Svůj inventář si prohlédneš příkazem 'inventář'. Tyto akce kombinuj s předměty v herním světě nebo v inventáři. Objekty piš vždy v prvním pádě (hlavu=hlava atd.). Pojďme si to vyzkoušet v tomto úvodu. \n\nProbouzíš se v chladné a vlhké místnosti. Vzadu na hlavě cítíš ostrou bolest. Tvé ruce jsou svázáné, ale naštěstí cítíš v kapse svůj věrný nůž. Zkus napsat 'prozkoumej kapsy'.\n\nCo uděláš?"
@@ -181,14 +186,14 @@ def SKLEP1V():
     if "vezmi" in volba:
         if "nůž" in volba:
             if "nůž" in inventar:
-                t=("Nůž už máš v inventáři")
+                t=("Nůž už máš v inventáři.")
                 SKLEP1V()
             else:
                 t=("Sebral jsi svůj nůž. Zkus ho použít na provazy příkazem 'použij nůž na provazy'.")
                 inventar.append("nůž")
                 SKLEP1V()
         else:
-            t=("Nevím jak to udělat")
+            t=("Nevím jak to udělat.")
             SKLEP1V()
     if "použij" in volba:
         if "nůž" in volba:
@@ -201,11 +206,11 @@ def SKLEP1V():
                     svazan=0
                     SKLEP1V()
                 else:
-                    t=("To asi nepůjde")
+                    t=("To asi nepůjde.")
                     SKLEP1V()
             else:
                 if "provaz" in volba or "provazy" in volba:
-                    t=("Provazy už jsou přeřízlé")
+                    t=("Provazy už jsou přeřízlé.")
                     SKLEP1V()
                 else:
                     t=("To asi nepůjde")
@@ -277,7 +282,7 @@ def SKLEP2V():
             t=("Kolem sebe vidíš malý sklep. V rohu místnosti leží něco co vypadá jako deka, po straně místnosti se pak nachází stůl na kterém něco leží.")
             SKLEP2V()
         if "stůl" in volba:
-            t=("Na stole se nachází kovová tyč, nějaké odpadky a prázdná láhev")
+            t=("Na stole se nachází kovová tyč, nějaké odpadky a prázdná láhev.")
             stul=1
             SKLEP2V()
         if "deka" in volba:
@@ -288,14 +293,14 @@ def SKLEP2V():
                 t=("Tyč na stole. Celkem dlouhá, celá ze železa.")
                 SKLEP2V()
             else:
-                t=("Nevím co máš na mysli")
+                t=("Nevím co máš na mysli.")
                 SKLEP2V()
         if "láhev" in volba:
             if stul==1:
                 t=("Prázdná láhev. Nic v ní není.")
                 SKLEP2V()
             else:
-                t=("Nevím co máš na mysli")
+                t=("Nevím co máš na mysli.")
                 SKLEP2V()
     if "vezmi" in volba:
         if "deka" in volba:
@@ -303,7 +308,7 @@ def SKLEP2V():
             SKLEP2V()
         if "tyč" in volba:
             if "tyč" in inventar:
-                t=("Už máš tyč ve svém inventáři")
+                t=("Už máš tyč ve svém inventáři.")
                 SKLEP2V()
             else:
                 if stul==1:
@@ -311,10 +316,10 @@ def SKLEP2V():
                     inventar.append("tyč")
                     SKLEP2V()
                 else:
-                    t=("Nevím o čem mluvíš")
+                    t=("Nevím o čem mluvíš.")
                     SKLEP2V()
         if "láhev" in volba:
-            t=("Tu nebudeš asi potřebovat")
+            t=("Tu nebudeš asi potřebovat.")
             SKLEP2V()
         if "odpadky" in volba:
             t=("Fuj?")
@@ -322,17 +327,17 @@ def SKLEP2V():
     if "použij" in volba:
         if "deka" in volba:
             if "klíč" in inventar:
-                t=("Nic jiného už tam není")
+                t=("Nic jiného už tam není.")
                 SKLEP2V()
             else:
                 winsound.PlaySound("sound/blanket.wav",winsound.SND_ASYNC)
                 time.sleep(1)
                 winsound.PlaySound("sound/basement.wav",winsound.SND_ASYNC | winsound.SND_LOOP)
-                t=("Pod dekou byl klíč který sis vzal")
+                t=("Pod dekou byl klíč, který sis vzal.")
                 inventar.append("klíč")
                 SKLEP2V()
         if "nůž" in volba:
-            t=("To asi nepůjde")
+            t=("To asi nepůjde.")
             SKLEP2V()
         if "dveře" in volba:
             if dvereopen==1:
@@ -352,26 +357,23 @@ def SKLEP2V():
                     inventar.remove("tyč")
                     SKLEP2V()
                 else:
-                    t=("To nefunguje")
+                    t=("To nefunguje.")
                     SKLEP2V()
             elif "klíč" in volba:
                 if "klíč" in inventar:
-                    t=("Klíč se zlomil")
+                    t=("Klíč se zlomil.")
                     inventar.remove("klíč")
                     SKLEP2V()
                 else:
-                    t=("To nejde")
+                    t=("To nejde.")
             else:
-                t=("Dveře jsou zamčené")
+                t=("Dveře jsou zamčené.")
                 SKLEP2V()
     else:
         t=("Tento příkaz neznám: ",volba)
         SKLEP2V()
 #SC03 (Obývací pokoj)
 def NOVA_HRA():
-    ###
-    winsound.PlaySound("sound/hit.wav", winsound.SND_ASYNC)
-    ###
     global inventar
     inventar=[]
     global zamek_alfa_zamcen
@@ -624,7 +626,7 @@ def OPV():
                 OPV()
         if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
             if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
-                t=("Slepil jsi dohromady klíč(GAMA)")
+                t=("Slepil jsi dohromady klíč(GAMA).")
                 inventar.remove("polovina klíče GAMA(A)")
                 inventar.remove("polovina klíče GAMA(B)")
                 inventar.append("klíč(GAMA)")
@@ -649,7 +651,7 @@ def OPV():
                 inventar.append("nůž(ostrý)")
                 OPV()
             else:
-                t=("Něco potřebuješ")
+                t=("Něco potřebuješ.")
                 OPV()
         if "tv" in volba or "televize" in volba:
             t=("Televize se zapla. V televizi jsou zprávy o nedávných vraždách. Pachatele se nepodařilo nikdy najít, ale všechny oběti měly do dlaní vyřezaný kříž. Po chvíli se rozhodneš televizi vypnout.")
@@ -658,7 +660,7 @@ def OPV():
             if "hák(zlomený)" in inventar or "hák(prodloužený)" in inventar:
                 if "gauč" in volba:
                     if "klíč(váhy)" in inventar:
-                        t=("Nic jiného už jsi nenašel")
+                        t=("Nic jiného už jsi nenašel.")
                         OPV()
                     else:
                         t=("Hákem sis přitáhl předmět pod gaučem. Ukázalo se že je to klíč se znakem vah. Klíč sis vzal.")
@@ -679,7 +681,7 @@ def OPV():
                             dvere_vahy_zamceno=0
                             OPV()
                         else:
-                            t=("Nemáš klíč")
+                            t=("Nemáš klíč.")
                             OPV()
                     else:
                         t=("Dveře jsou už odemčené.")
@@ -776,10 +778,7 @@ def OPV():
                 CHODBAT()
             else:
                 t=("Nahoře je moc tma na to abys tam šel.")
-                OPV()
-        
-        #Nutno dodělat předměty v inventáři
-                        
+                OPV()     
     else:
         t=("Tento příkaz neznám: ",volba)
         OPV()
@@ -947,7 +946,7 @@ def KUCHYNEV():
                 inventar.append("nůž(tupý)")
                 KUCHYNEV()
         else:
-            t=("Nevím jak to udělat")
+            t=("Nevím jak to udělat.")
             KUCHYNEV()
     if "použij" in volba:
         if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in volba:
@@ -962,7 +961,7 @@ def KUCHYNEV():
                 KUCHYNEV()
         if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
             if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
-                t=("Slepil jsi dohromady klíč(GAMA)")
+                t=("Slepil jsi dohromady klíč(GAMA).")
                 inventar.remove("polovina klíče GAMA(A)")
                 inventar.remove("polovina klíče GAMA(B)")
                 inventar.append("klíč(GAMA)")
@@ -987,7 +986,7 @@ def KUCHYNEV():
                 inventar.append("nůž(ostrý)")
                 KUCHYNEV()
             else:
-                t=("Něco potřebuješ")
+                t=("Něco potřebuješ.")
                 KUCHYNEV()
         if "průchod" in volba or "pokoj" in volba:
             OPT2()
@@ -1020,7 +1019,6 @@ def KUCHYNEV():
             else:
                 t=("V trezori už nic není.")
                 KUCHYNEV()
-    #Chybí dodělat věci v inventáři
     else:
         t=("Tento příkaz neznám: ",volba)
         KUCHYNEV()
@@ -1182,7 +1180,7 @@ def KOUPELNAV():
                 KOUPELNAV()
         if "vana" in volba:
             if vana_naplnena==1:
-                t=("Špinavá vana plná špinavé vody. Prostě fuj.")
+                t=("Špinavá vana plná špinavé vody. Prostě fuj. Na dně se něco leskne.")
                 KOUPELNAV()
             else:
                 t=("Prázdná vana. Pořád není nejčistší.")
@@ -1192,7 +1190,7 @@ def KOUPELNAV():
             KOUPELNAV()
     
         else:
-            t=("Nevím jak to udělat")
+            t=("Nevím jak to udělat.")
             KOUPELNAV()
     if "použij" in volba:
         if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in volba:
@@ -1207,7 +1205,7 @@ def KOUPELNAV():
                 KOUPELNAV()
         if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
             if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
-                t=("Slepil jsi dohromady klíč(GAMA)")
+                t=("Slepil jsi dohromady klíč(GAMA).")
                 inventar.remove("polovina klíče GAMA(A)")
                 inventar.remove("polovina klíče GAMA(B)")
                 inventar.append("klíč(GAMA)")
@@ -1232,7 +1230,7 @@ def KOUPELNAV():
                 inventar.append("nůž(ostrý)")
                 KOUPELNAV()
             else:
-                t=("Něco potřebuješ")
+                t=("Něco potřebuješ.")
                 KOUPELNAV()
         if "dveře" in volba:
             OPT2()
@@ -1463,7 +1461,7 @@ def HERNAV():
                 HERNAV()
         if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
             if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
-                t=("Slepil jsi dohromady klíč(GAMA)")
+                t=("Slepil jsi dohromady klíč(GAMA).")
                 inventar.remove("polovina klíče GAMA(A)")
                 inventar.remove("polovina klíče GAMA(B)")
                 inventar.append("klíč(GAMA)")
@@ -1488,7 +1486,7 @@ def HERNAV():
                 inventar.append("nůž(ostrý)")
                 HERNAV()
             else:
-                t=("Něco potřebuješ")
+                t=("Něco potřebuješ.")
                 HERNAV()
         if "dveře" in volba:
             OPT2()
@@ -1552,7 +1550,7 @@ def HERNAV():
             if "nůž" in volba:
                 if "nůž(ostrý)" in inventar:
                     if telo_rozrezane==0:
-                        t=("S neuvěřitelným odporem vytahujeě svůj nůž a pomalu řežeě břicho mrtvého. Při prvním kontaktu nože se vyvalilo obrovské množství krve ale ty dále pokračuješ. Když se dostaneš k žaludku nacházíš klíč, který sis vzal.")
+                        t=("S neuvěřitelným odporem vytahujeě svůj nůž a pomalu řežeš břicho mrtvého. Při prvním kontaktu nože se vyvalilo obrovské množství krve ale ty dále pokračuješ. Když se dostaneš k žaludku nacházíš klíč, který sis vzal.")
                         inventar.append("klíč(BETA)")
                         telo_rozrezane=1
                         HERNAV()
@@ -1713,7 +1711,7 @@ def CHODBAV():
                 t=("Staré kukačky. Chybí jim minutová ručička.")
                 CHODBAV()
         if "okno" in volba:
-            t=("Okno je proražené větví stromu. Zdá se, že by se po této větvi dalo přelézt na balkón")
+            t=("Okno je proražené větví stromu. Zdá se, že by se po této větvi dalo přelézt na balkón.")
             CHODBAV()
     if "použij" in volba:
         if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in volba:
@@ -1728,7 +1726,7 @@ def CHODBAV():
                 CHODBAV()
         if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
             if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
-                t=("Slepil jsi dohromady klíč(GAMA)")
+                t=("Slepil jsi dohromady klíč(GAMA).")
                 inventar.remove("polovina klíče GAMA(A)")
                 inventar.remove("polovina klíče GAMA(B)")
                 inventar.append("klíč(GAMA)")
@@ -1753,7 +1751,7 @@ def CHODBAV():
                 inventar.append("nůž(ostrý)")
                 CHODBAV()
             else:
-                t=("Něco potřebuješ")
+                t=("Něco potřebuješ.")
                 CHODBAV()
         if "dveře" in volba:
             if "ložnice" in volba:
@@ -1968,7 +1966,7 @@ def LOZNICEV():
                 t=("V šuplících už nic není.")
                 LOZNICEV()
             else:
-                t=("V jednom z šuplíků jsi našel modelářské lepidlo a sadu baterií.")
+                t=("V jednom z šuplíků jsi našel modelářské lepidlo a sadu baterií. Oboje ses rozhodl vzít k sobě.")
                 inventar.append("lepidlo")
                 inventar.append("baterie")
                 LOZNICEV()
@@ -1997,7 +1995,7 @@ def LOZNICEV():
                 inventar.append("ručička")
                 LOZNICEV()
         else:
-            t=("Nevím jak to udělat")
+            t=("Nevím jak to udělat.")
             LOZNICEV()
     if "použij" in volba:
         if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in volba:
@@ -2037,7 +2035,7 @@ def LOZNICEV():
                 inventar.append("nůž(ostrý)")
                 LOZNICEV()
             else:
-                t=("Něco potřebuješ")
+                t=("Něco potřebuješ.")
                 LOZNICEV()
         if "dveře" in volba:
             CHODBAT()
@@ -2192,7 +2190,7 @@ def KNIHOVNAV():
                 t=("Na obrazovce je fotka trezoru s popiskem: R. 'Smithova *++*'.")
                 KNIHOVNAV()
         if "vzkaz" in volba or "lístek" in volba:
-            t=("Na lístku je napsáno : 'Dobrotivý bůh se neohlíží na naše omyly, jestliže způsobují věci, které sami nemůžeme poznat.' a obrázek znaku 'alfa'")
+            t=("Na lístku je napsáno : 'Dobrotivý bůh se neohlíží na naše omyly, jestliže způsobují věci, které sami nemůžeme poznat.' a obrázek znaku 'alfa'.")
             KNIHOVNAV()          
     if "použij" in volba:
         if "izolepa" in volba and "tágo(zlomené)" in volba and "hák(zlomený)" in volba:
@@ -2207,7 +2205,7 @@ def KNIHOVNAV():
                 KNIHOVNAV()
         if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
             if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
-                t=("Slepil jsi dohromady klíč(GAMA)")
+                t=("Slepil jsi dohromady klíč(GAMA).")
                 inventar.remove("polovina klíče GAMA(A)")
                 inventar.remove("polovina klíče GAMA(B)")
                 inventar.append("klíč(GAMA)")
@@ -2232,7 +2230,7 @@ def KNIHOVNAV():
                 inventar.append("nůž(ostrý)")
                 KNIHOVNAV()
             else:
-                t=("Něco potřebuješ")
+                t=("Něco potřebuješ.")
                 KNIHOVNAV()
         if "dveře" in volba:
             CHODBAT()
@@ -2247,7 +2245,7 @@ def KNIHOVNAV():
                     PC=1
                     KNIHOVNAV()
                 else:
-                    t=("Špatné heslo")
+                    t=("Špatné heslo.")
                     KNIHOVNAV()
             else:
                 t=("Na tomto počítači už není nic jiného.")
@@ -2486,7 +2484,7 @@ def BALKONV():
                 inventar.append("nůž(ostrý)")
                 BALKONV()
             else:
-                t=("Něco potřebuješ")
+                t=("Něco potřebuješ.")
                 BALKONV()
         if "okno" in volba or "větev" in volba:
             CHODBAT()
@@ -2569,7 +2567,7 @@ def PUDAV():
                     t=("To ti asi teď nepomůže.")
                     PUDAV()
             else:
-                t=("Nevidíš si ani na špičku nosu. Tohle nezvládneš")
+                t=("Nevidíš si ani na špičku nosu. Tohle nezvládneš.")
                 PUDAV()
             t=("Je moc tma na to abys cokoliv rozeznal.")
             PUDAV()
@@ -2672,7 +2670,7 @@ def PUDAV():
                     PUDAV()
                 if "skříň" in volba:
                     if skrin==0:
-                        t=("Masivní železná skříň. Je zamčená číselným zámkem. Na zámku je vyrytá značka '°F'")
+                        t=("Masivní železná skříň. Je zamčená číselným zámkem. Na zámku je vyrytá značka '°F'.")
                         PUDAV()
                     else:
                         t=("Masivní železná skříň. Zdá se být orevřená.")
@@ -2701,7 +2699,7 @@ def PUDAV():
                         inventar.append("alkohol")
                         PUDAV()
                 else:
-                    t=("Nevím jak to udělat")
+                    t=("Nevím jak to udělat.")
                     PUDAV()
             if "použij" in volba:
                 if "poklop" in volba or "dveře" in volba:
@@ -2718,7 +2716,7 @@ def PUDAV():
                         PUDAV()
                 if "lepidlo" in volba and "polovina klíče gama(a)" in volba and "polovina klíče gama(b)" in volba:
                     if "lepidlo" in inventar and "polovina klíče GAMA(A)" in inventar and "polovina klíče GAMA(B)" in inventar:
-                        t=("Slepil jsi dohromady klíč(GAMA)")
+                        t=("Slepil jsi dohromady klíč(GAMA).")
                         inventar.remove("polovina klíče GAMA(A)")
                         inventar.remove("polovina klíče GAMA(B)")
                         inventar.append("klíč(GAMA)")
@@ -2743,7 +2741,7 @@ def PUDAV():
                         inventar.append("nůž(ostrý)")
                         PUDAV()
                     else:
-                        t=("Něco potřebuješ")
+                        t=("Něco potřebuješ.")
                         PUDAV()
                 if "skříň" in volba:
                     if skrin==0:
@@ -2768,10 +2766,27 @@ def PUDAV():
 def vr(event=None):
     var.set(1)
 
+def helpp():
+    helpwindow=Tk()
+
+    helpwindow.resizable(False, False)
+    helpwindow.geometry("200x115")
+    helpwindow.title("Pomoc")
+    helpwindow.config(bg="black")
+    
+    helptext=Label(helpwindow, text="Hra se hraje pomocí tří základních příkazů: 'prozkoumej' 'použij' a 'vezmi'. Tyto příkazy pak kombinuj s předměty v herním světě. Předměty piš v prvním pádě (např. hlava). Předměty v inventáři piš přesně. Inventář otevřeš příkazem 'inventář'.", wraplength=200, bg="black", fg="yellow" )
+    helptext.pack(fill=BOTH)
+    
+    helpwindow.mainloop()
+
 main=Tk()
 
+menubar=Menu(main)
+menubar.add_command(label="Pomoc!", command=helpp)
+
 main.resizable(False, False)
-main.configure(bg="gray")
+main.configure(bg="gray", menu=menubar)
+main.title("game")
 
 var=IntVar()
 rychlost=StringVar()
@@ -2779,19 +2794,16 @@ rychlost.set(2)
 
 main.bind("<Return>", vr)
 
-scroll=Scrollbar(main)
-scroll.pack(side=RIGHT, fill=Y)
+text=Text(main, width=100, height=50, wrap=WORD, bg="black", fg="yellow", relief="flat")
+text.pack(fill=X)
 
-text=Text(main, width=100, height=50, wrap=WORD, yscrollcommand=scroll, bg="black", fg="yellow", relief="flat")
-text.pack(padx=5, pady=5)
+wolba=Entry(main, width=130, relief="flat", bg="black", fg="yellow", justify="center")
+wolba.pack(fill=X)
 
-wolba=Entry(main, width=130, relief="flat")
-wolba.pack(padx=5, pady=5)
+submit=Button(main, text="OK", command=vr, relief="flat", bg="black", fg="yellow")
+submit.pack(fill=X)
 
-submit=Button(main, text="OK", command=vr, relief="flat")
-submit.pack(padx=5, pady=5)
-
-start=Button(main, text="START", command=SKLEP1T, relief="flat")
-start.pack(padx=5, pady=5)
+start=Button(main, text="START", command=SKLEP1T, relief="flat", bg="black", fg="yellow")
+start.pack(fill=X)
 
 main.mainloop()
