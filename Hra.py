@@ -6,10 +6,18 @@ global first_launch
 first_launch=0
 
 def ENDING_GOOD():
-    print("PLACEHOLDER_GOOD_ENDING")
+    global t
+    t=("Otevíráš hlavní dveře. Venku už je dávno noc. Okamžitě se vydáváš směrem pryč když ze tmy na tebe vyběhne maskovaná osoba. Snaží se tě omráčit, ale naštěstí máš u sebe nabitou zbraň a v sebeobraně ho postřelíš. Když už útočník leží na zemi raněný, daří se ti utéct. Zdá se že všechno dobře dopadlo...\n\nKONEC...?")
+    PRINT()
+    submit.wait_variable(var)
     
 def ENDING_BAD():
-    print("PLACEHOLDER_BAD_ENDING")
+    global t
+    global inventar
+    t=("Otevíráš hlavní dveře. Venku už je dávno noc. Okamžitě se vydáváš směrem pryč když ze tmy na tebe vyběhne maskovaná osoba. Snaží se tě omráčit a po několika pokusech se mu to daří. Poslední co vidíš jsou schody do tmavého sklepení...")
+    PRINT()
+    inventar=[]
+    SKLEP1TA()
     
 def PRINT():
     global t
@@ -95,12 +103,24 @@ def BLANKV():
     else:
         print("Tento příkaz neznám.")
         BLANKV()
+        
 #SC01 (SKLEP TMA)
 def SKLEP1T():
     start.pack_forget()
     global t
     winsound.PlaySound("sound/basement.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
     t="Vítej do mojí hry! Pro provedení akce piš do příkazové řádky. Hra má tři hlavní akce: 'Prozkoumej' 'Vezmi' a 'Použij'. Svůj inventář si prohlédneš příkazem 'inventář'. Tyto akce kombinuj s předměty v herním světě nebo v inventáři. Objekty piš vždy v prvním pádě (hlavu=hlava atd.). Pojďme si to vyzkoušet v tomto úvodu. \n\nProbouzíš se v chladné a vlhké místnosti. Vzadu na hlavě cítíš ostrou bolest. Tvé ruce jsou svázáné, ale naštěstí cítíš v kapse svůj věrný nůž. Zkus napsat 'prozkoumej kapsy'.\n\nCo uděláš?"
+    global inventar
+    global svazan
+    global svetlo
+    svetlo=0
+    svazan=1
+    inventar=[]
+    SKLEP1V()
+def SKLEP1TA():
+    global t
+    winsound.PlaySound("sound/basement.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+    t="Probouzíš se v chladné a vlhké místnosti. Vzadu na hlavě cítíš ostrou bolest. Tvé ruce jsou svázáné, ale naštěstí cítíš v kapse svůj věrný nůž. Zkus napsat 'prozkoumej kapsy'.\n\nCo uděláš?"
     global inventar
     global svazan
     global svetlo
@@ -585,10 +605,13 @@ def OPV():
         if "dveře" in volba:
             if "hlavní" in volba:
                 t=("Hlavní dveře od domu vedoucí ven. Jsou zamčené třemi zámky.")
+                PRINT()
                 if zamek_alfa_zamcen==1:
                     t=("Zámek se znakem 'ALFA' je zamčený.")
+                    PRINT()
                 if zamek_beta_zamcen==1:
                     t=("Zámek se znakem 'BETA' je zamčený.")
+                    PRINT()
                 if zamek_gama_zamcen==1:
                     t=("Zámek se znakem 'GAMA' je zamčený.")
                 elif zamek_alfa_zamcen==0 and zamek_beta_zamcen==0 and zamek_gama_zamcen==0:
