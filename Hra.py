@@ -20,101 +20,10 @@ def PRINT():
     for i in t:
         text.insert(END, i)
         time.sleep(0.025)
+        text.yview(END)
         text.update()
     text.insert(END, "\n\n")
     text.config(state=DISABLED)
-"""
-#INVENTAR
-if "prozkoumej" in volba:
-    if "klíč(váhy)" in volba:
-        if "klíč(váhy)" in inventar:
-            t="Klíč se znamením vah."
-            BLANKV()
-    if "nůž" in volba:
-        if "nůž(tupý)" in inventar:
-            t="Tupý kuchyňský nůž."
-            BLANKV()
-        if "nůž(ostrý)" in inventar:
-            t="Ostrý kuchyňský nůž. Vhodný pro řezání masa, ovoce i zeleniny"
-            BLANKV()
-    if "izolepa" in volba or "lepící páska" in volba:
-        if "izolepa" in inventar:
-            t="Stříbrná lepící páska, vhodná pro namáhané spoje."
-            BLANKV()
-    if "nůž" in volba:
-        if "nůž(ostrý)" in inventar:
-            t="Ostrý kuchyňský nůž. Vhodný pro krájení masa nebo zeleniny."
-            BLANKV()
-        if "nůž(tupý)" in inventar:
-            t="Tupý kuchyňský nůž. Tímhle nic nepřeřízneš."
-            BLANKV()
-    if "pojistka" in volba:
-        if "pojistka" in inventar:
-            t="Obyčejná pojistka."
-            BLANKV()
-    if "polovina klíče" in volba:
-        if "polovina klíče 'OMEGA'(A)" in inventar or "polovina klíče 'OMEGA'(B)" in inventar:
-            t="Polovina klíče se znamením 'OMEGA'."
-            BLANKV()
-    if "svítilna" in volba:
-        if "svítilna(bez baterií)" in inventar:
-            t="Vodotěsná svítilna. Bohužel v ní nejsou baterie."
-            BLANKV()
-        elif "svítilna" in inventar:
-            t="Funkční vodotěsná svítilna."
-            BLANKV()
-    if "tágo" in volba:
-        if "tágo(zlomené)" in inventar:
-            t="Kulečníkové tágo. Bohužel je zlomené."
-            BLANKV()
-    if "klíč(omega)" in volba:
-        if "klíč(OMEGA)" in inventar:
-            t="Klíč se znamením 'OMEGA'."
-            BLANKV()
-    if "klíč(beta)" in volba:
-        if "klíč(BETA)" in inventar:
-            t="Klíč se znamením 'BETA'."
-            BLANKV()
-    if "klíč(beran)" in volba:
-        if "klíč(beran)" in inventar:
-            t="Klíč se znamením berana."
-            BLANKV()
-    if "lepidlo" in volba:
-        if "lepidlo" in inventar:
-            t="Silné modelářské lepidlo. Vhodné pro lepení dřeva, plastů i kovu."
-            BLANKV()
-    if "baterie" in volba:
-        if "baterie" in inventar:
-            t="Sada tužkových baterií."
-            BLANKV()
-    if "zapalovač" in volba:
-        if "zapalovač" in inventar:
-            t="Kvalitní benzínový zapalovač s vyrytým křížem."
-            BLANKV()
-    if "ručička" in volba:
-        if "ručička" in inventar:
-            t="Ručička z hodin."
-            BLANKV()
-    if "klíč(alfa)" in volba:
-        if "klíč(ALFA)" in inventar:
-            t="Klíč se znamením 'ALFA'."
-            BLANKV()
-    if "hák" in volba:
-        if "hák(zlomený)" in inventar:
-            t="Zlomený hák na čištění okapů. V tomhle stavu s ním asi nikam nedosáhneš."
-            BLANKV()
-        elif "hák(prodloužený)" in inventar:
-            t="Hák na čištění okapů prodloužený zlomeným tágem."
-            BLANKV()
-    if "zbraň" in volba:
-        if "zbraň" in inventar:
-            t="Nabitá pistole."
-            BLANKV()
-    if "brousek" in volba:
-        if "brousek" in inventar:
-            t="Brousek. Vhodný pro ostření nožů."
-            BLANKV()
-"""
 #SC00_BLANK
 def BLANKT():
     print("PLACEHOLDER") #Úvodní text scény
@@ -146,7 +55,8 @@ def BLANKV():
     if "dbg_chodba" in volba:
         CHODBAT()
     if "dbg_inv" in volba:
-        volbaa=input("Zadej předmět:")
+        submit.wait_variable(var)
+        volbaa=wolba.get()
         inventar.append(volbaa)
     #------------------------------------------------
     if volba=="inventář" or volba=="inventar": #Kontrola inventáře
@@ -229,7 +139,8 @@ def SKLEP1V():
     if "dbg_chodba" in volba:
         CHODBAT()
     if "dbg_inv" in volba:
-        volbaa=input("Zadej předmět:")
+        submit.wait_variable(var)
+        volbaa=wolba.get()
         inventar.append(volbaa)
     #------------------------------------------------
     if "prozkoumej" in volba:
@@ -354,7 +265,8 @@ def SKLEP2V():
     if "dbg_chodba" in volba:
         CHODBAT()
     if "dbg_inv" in volba:
-        volbaa=input("Zadej předmět:")
+        submit.wait_variable(var)
+        volbaa=wolba.get()
         inventar.append(volbaa)
     #------------------------------------------------
     if volba=="inventář" or volba=="inventar":
@@ -545,7 +457,8 @@ def OPV():
     if "dbg_chodba" in volba:
         CHODBAT()
     if "dbg_inv" in volba:
-        volbaa=input("Zadej předmět:")
+        submit.wait_variable(var)
+        volbaa=wolba.get()
         inventar.append(volbaa)
     #------------------------------------------------
     if volba=="inventář" or volba=="inventar":
@@ -905,7 +818,8 @@ def KUCHYNEV():
     if "dbg_chodba" in volba:
         CHODBAT()
     if "dbg_inv" in volba:
-        volbaa=input("Zadej předmět:")
+        submit.wait_variable(var)
+        volbaa=wolba.get()
         inventar.append(volbaa)
     #------------------------------------------------
     if volba=="inventář" or volba=="inventar":
@@ -1147,7 +1061,8 @@ def KOUPELNAV():
     if "dbg_chodba" in volba:
         CHODBAT()
     if "dbg_inv" in volba:
-        volbaa=input("Zadej předmět:")
+        submit.wait_variable(var)
+        volbaa=wolba.get()
         inventar.append(volbaa)
     #------------------------------------------------
     if volba=="inventář" or volba=="inventar":
@@ -1390,7 +1305,8 @@ def HERNAV():
     if "dbg_chodba" in volba:
         CHODBAT()
     if "dbg_inv" in volba:
-        volbaa=input("Zadej předmět:")
+        submit.wait_variable(var)
+        volbaa=wolba.get()
         inventar.append(volbaa)
     #------------------------------------------------
     if volba=="inventář" or volba=="inventar":
@@ -1690,7 +1606,8 @@ def CHODBAV():
     if "dbg_chodba" in volba:
         CHODBAT()
     if "dbg_inv" in volba:
-        volbaa=input("Zadej předmět:")
+        submit.wait_variable(var)
+        volbaa=wolba.get()
         inventar.append(volbaa)
     #------------------------------------------------
     if volba=="inventář" or volba=="inventar":
@@ -1859,7 +1776,7 @@ def CHODBAV():
                         CHODBAV()
                 else:
                     KNIHOVNAT()
-        if "okno" in volba:
+        if "okno" in volba or "větev" in volba:
             t=("Přelezl jsi po větvi stromu na balkón.")
             BALKONT()
         if "schody" in volba:
@@ -1931,7 +1848,8 @@ def LOZNICEV():
     if "dbg_chodba" in volba:
         CHODBAT()
     if "dbg_inv" in volba:
-        volbaa=input("Zadej předmět:")
+        submit.wait_variable(var)
+        volbaa=wolba.get()
         inventar.append(volbaa)
     #------------------------------------------------
     if volba=="inventář" or volba=="inventar":
@@ -2161,7 +2079,8 @@ def KNIHOVNAV():
     if "dbg_chodba" in volba:
         CHODBAT()
     if "dbg_inv" in volba:
-        volbaa=input("Zadej předmět:")
+        submit.wait_variable(var)
+        volbaa=wolba.get()
         inventar.append(volbaa)
     #------------------------------------------------
     if volba=="inventář" or volba=="inventar":
@@ -2391,7 +2310,8 @@ def BALKONV():
     if "dbg_chodba" in volba:
         CHODBAT()
     if "dbg_inv" in volba:
-        volbaa=input("Zadej předmět:")
+        submit.wait_variable(var)
+        volbaa=wolba.get()
         inventar.append(volbaa)
     #------------------------------------------------
     if volba=="inventář" or volba=="inventar":
@@ -2625,7 +2545,8 @@ def PUDAV():
     if "dbg_chodba" in volba:
         CHODBAT()
     if "dbg_inv" in volba:
-        volbaa=input("Zadej předmět:")
+        submit.wait_variable(var)
+        volbaa=wolba.get()
         inventar.append(volbaa)
     #------------------------------------------------
     if volba=="inventář" or volba=="inventar":
@@ -2846,7 +2767,7 @@ def PUDAV():
 ###########################################################################################################################################################################################################
 def vr(event=None):
     var.set(1)
-    
+
 main=Tk()
 
 main.resizable(False, False)
@@ -2861,16 +2782,16 @@ main.bind("<Return>", vr)
 scroll=Scrollbar(main)
 scroll.pack(side=RIGHT, fill=Y)
 
-start=Button(main, text="START", command=SKLEP1T)
-start.pack(padx=5, pady=5)
-
 text=Text(main, width=100, height=50, wrap=WORD, yscrollcommand=scroll, bg="black", fg="yellow", relief="flat")
 text.pack(padx=5, pady=5)
 
 wolba=Entry(main, width=130, relief="flat")
 wolba.pack(padx=5, pady=5)
 
-submit=Button(main, text="OK", command=vr)
+submit=Button(main, text="OK", command=vr, relief="flat")
 submit.pack(padx=5, pady=5)
+
+start=Button(main, text="START", command=SKLEP1T, relief="flat")
+start.pack(padx=5, pady=5)
 
 main.mainloop()
