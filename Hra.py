@@ -1011,7 +1011,7 @@ def KUCHYNEV():
             else:
                 t=("Něco potřebuješ.")
                 KUCHYNEV()
-        if "průchod" in volba or "pokoj" in volba:
+        if "průchod" in volba or "pokoj" in volba or "dveře" in volba:
             OPT2()
         if "trezor" in volba:
             if trezor_zamcen==1:
