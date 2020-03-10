@@ -628,7 +628,7 @@ def OPV():
                 t=("Jsou to dřevěné dveře, které kdysi dávno bývaly bílé. Ze spodní strany začaly před nějakou dobou plesnivět. Na dveřích je velkým písmem napsáno: 'KOUPELNA'.")
                 OPV()
         if "police" in volba or "fotky" in volba:
-            t=("Improvizovaná dřevěná polička na které jsou fotky neznámých lidí. První je černobílá. Je na ní starší muž s knírem, který sedí v houpacím křesle. Pod fotkou je popis: 'Andrew Smith 1956-1983'. Druhá fotka zachycuje starší paní v šatech. Pod fotkou je popis: 'Amanda Smith 1957-1998'. Na třetí fotce je usmívající se mladá žena v rudých šatech. Pod její fotkou je popis: 'Maria Smith-Green 1979-2013'. Na poslední fotce je malé dítě v kolébce. Pod fotkou je popis: 'Thomas Green 2011-2013'")
+            t=("Improvizovaná dřevěná polička na které jsou fotky neznámých lidí. První je černobílá. Je na ní starší muž s knírem, který sedí v houpacím křesle. Pod fotkou je popis: 'Andrew Smith *'56 +'83'. Druhá fotka zachycuje starší paní v šatech. Pod fotkou je popis: 'Amanda Smith *'57 +'98'. Na třetí fotce je usmívající se mladá žena v rudých šatech. Pod její fotkou je popis: 'Maria Smith-Green *'79 +'13'. Na poslední fotce je malé dítě v kolébce. Pod fotkou je popis: 'Thomas Green *'11 +'13'")
             OPV()
         else:
             t=("Nevím jak to udělat.")
