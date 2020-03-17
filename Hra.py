@@ -14,21 +14,72 @@ def ENDING_GOOD():
     global t
     t=("Otevíráš hlavní dveře. Venku už je dávno noc. Okamžitě se vydáváš směrem pryč když ze tmy na tebe vyběhne maskovaná osoba. Snaží se tě omráčit, ale naštěstí máš u sebe nabitou zbraň a v sebeobraně ho postřelíš. Když už útočník leží na zemi raněný, daří se ti utéct. Zdá se že všechno dobře dopadlo...\n\nKONEC...?")
     PRINT()
+    t=("Pro titulky stiskni ENTER")
+    PRINT()
+    submit.wait_variable(var)
+    CREDITS()
     submit.wait_variable(var)
     
 def ENDING_BAD():
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/hit.wav"))
     global t
     global inventar
     t=("Otevíráš hlavní dveře. Venku už je dávno noc. Okamžitě se vydáváš směrem pryč když ze tmy na tebe vyběhne maskovaná osoba. Snaží se tě omráčit a po několika pokusech se mu to daří. Poslední co vidíš jsou schody do tmavého sklepení...")
     PRINT()
     inventar=[]
     SKLEP1TA()
+
+def CREDITS():
+    text.tag_configure("center", justify='center')
+    text.config(state=NORMAL)
+    text.delete('1.0', END)
+    text.config(state=DISABLED)
+    global t
+    t="Tato hra je výsledkem mé dlouhodobé maturitní práce"
+    PRINTC()
+    t="Děkuji za vedení a konzultace Ing. Marku Nožkovi"
+    PRINTC()
+    t="Speciální poděkování Aramu Denkovi za testování této hry"
+    PRINTC()
+    t="Použité zdroje:"
+    PRINTC()
+    t="https://stackoverflow.com/"
+    PRINTC()
+    t="https://freesound.org/"
+    PRINTC()
+    t="https://www.pygame.org/"
+    PRINTC()
+    t="https://github.com/"
+    PRINTC()
+    t="https://www.audacityteam.org/"
+    PRINTC()
+    t="Závěrečná znělka 'Theme of Laura' je majetkem Konami Music Entertainment, Inc."
+    PRINTC()
+    t="Děkuji ti za hraní"
+    PRINTC()
+    t="Adam Kocian MMXX"
+    PRINTC()
     
+
+def PRINTC():
+    global t
+    wolba.delete(0,"end")
+    text.config(state=NORMAL)
+    for i in t:
+        text.insert(END, i)
+        text.tag_add("center", "1.0", "end")
+        time.sleep(0.1)
+        text.yview(END)
+        text.update()
+    text.insert(END, "\n\n")
+    text.config(state=DISABLED)
+    time.sleep(2)
+
 def PRINT():
     global t
     global first_launch
+    text.config(state=NORMAL)
     if first_launch==1:
-        text.config(state=NORMAL)
         text.insert(END, wolba.get())
         text.insert(END, "\n\n")
     wolba.delete(0,"end")
@@ -173,6 +224,8 @@ def SKLEP1V():
         PUDAT()
     if "dbg_chodba" in volba:
         CHODBAT()
+    if "dbg_ending_good" in volba:
+        ENDING_GOOD()
     if "dbg_inv" in volba:
         submit.wait_variable(var)
         volbaa=wolba.get()
@@ -450,14 +503,14 @@ def NOVA_HRA():
 def OPT():
     #pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/inside1.wav"),loops=-1)
     pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/inside.wav"),loops=-1)
-    pygame.mixer.Channel(0).set_volume(0.5)
+    pygame.mixer.Channel(0).set_volume(0.75)
     global t
     t=("Probouzíš se na starém, zapáchajícím gauči. Vstáváš a zjišťuješ že se nacházíš v neznámé místnosti. \n\nCo uděláš?")
     OPV()
 def OPT2():
     #pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/inside1.wav"),loops=-1)
     pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/inside.wav"),loops=-1)
-    pygame.mixer.Channel(0).set_volume(0.5)
+    pygame.mixer.Channel(0).set_volume(0.75)
     global t
     t=("Jsi v pokoji.")
     t=("Co uděláš?")
