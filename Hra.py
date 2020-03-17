@@ -1,4 +1,5 @@
 #import winsound
+import pygame
 import time
 from tkinter import *
 
@@ -6,6 +7,10 @@ global first_launch
 first_launch=0
 
 def ENDING_GOOD():
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/gunshot.wav"))
+    pygame.mixer.music.load("sound/Silent Hill 2 OST - Theme Of Laura.mp3")
+    pygame.mixer.music.set_volume(0.5)
+    pygame.mixer.music.play()
     global t
     t=("Otevíráš hlavní dveře. Venku už je dávno noc. Okamžitě se vydáváš směrem pryč když ze tmy na tebe vyběhne maskovaná osoba. Snaží se tě omráčit, ale naštěstí máš u sebe nabitou zbraň a v sebeobraně ho postřelíš. Když už útočník leží na zemi raněný, daří se ti utéct. Zdá se že všechno dobře dopadlo...\n\nKONEC...?")
     PRINT()
@@ -106,9 +111,14 @@ def BLANKV():
         
 #SC01 (SKLEP TMA)
 def SKLEP1T():
+    #Inicializace zvuku
+
+    pygame.mixer.init()
+
+    ################################
     start.pack_forget()
     global t
-    #winsound.PlaySound("sound/basement.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/basement.wav"),loops=-1)
     t="Vítej do mojí hry! Pro provedení akce piš do příkazové řádky. Hra má tři hlavní akce: 'Prozkoumej' 'Vezmi' a 'Použij'. Svůj inventář si prohlédneš příkazem 'inventář'. Tyto akce kombinuj s předměty v herním světě nebo v inventáři. Objekty piš vždy v prvním pádě (hlavu=hlava atd.). Pojďme si to vyzkoušet v tomto úvodu. \n\nProbouzíš se v chladné a vlhké místnosti. Vzadu na hlavě cítíš ostrou bolest. Tvé ruce jsou svázáné, ale naštěstí cítíš v kapse svůj věrný nůž. Zkus napsat 'prozkoumej kapsy'.\n\nCo uděláš?"
     global inventar
     global svazan
@@ -119,7 +129,7 @@ def SKLEP1T():
     SKLEP1V()
 def SKLEP1TA():
     global t
-    #winsound.PlaySound("sound/basement.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/basement.wav"),loops=-1)
     t="Probouzíš se v chladné a vlhké místnosti. Vzadu na hlavě cítíš ostrou bolest. Tvé ruce jsou svázáné, ale naštěstí cítíš v kapse svůj věrný nůž. Zkus napsat 'prozkoumej kapsy'.\n\nCo uděláš?"
     global inventar
     global svazan
@@ -219,10 +229,8 @@ def SKLEP1V():
         if "nůž" in volba:
             if svazan==1:
                 if "provaz" in volba or "provazy" in volba:
-                    #winsound.PlaySound("sound/rope.wav", winsound.SND_ASYNC)
-                    time.sleep(13)
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/rope.wav"))
                     t=("Podařilo se ti provazy přeříznout. Nyní jsi volný. Zkus se podívat kolem.")
-                    #winsound.PlaySound("sound/basement.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
                     svazan=0
                     SKLEP1V()
                 else:
@@ -240,8 +248,7 @@ def SKLEP1V():
                 t=("Jsi svázaný, nedokážeš se k tlačítku dostat a stisknout ho. Nejdříve se uvolni.")
                 SKLEP1V()
             else:
-                #winsound.PlaySound("sound/switch.wav", winsound.SND_ASYNC)
-                time.sleep(1)
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/switch.wav"))
                 SKLEP2T()
                 svetlo=1
         else:
@@ -256,7 +263,6 @@ def SKLEP1V():
 #SC02 (SKLEP SVĚTLO)
 def SKLEP2T():
     global t
-    #winsound.PlaySound("sound/basement.wav",winsound.SND_ASYNC | winsound.SND_LOOP)
     t=("Místnost zalilo světlo. Kolem sebe vidíš něco co by mohl být sklep. Teď si to vyzkoušej sám!\n\nCo uděláš?")
     global stul
     global dvereopen
@@ -360,9 +366,7 @@ def SKLEP2V():
                 t=("Nic jiného už tam není.")
                 SKLEP2V()
             else:
-                #winsound.PlaySound("sound/blanket.wav",winsound.SND_ASYNC)
-                time.sleep(1)
-                #winsound.PlaySound("sound/basement.wav",winsound.SND_ASYNC | winsound.SND_LOOP)
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/blanket.wav"))
                 t=("Pod dekou byl klíč, který sis vzal.")
                 inventar.append("klíč")
                 SKLEP2V()
@@ -372,16 +376,11 @@ def SKLEP2V():
         if "dveře" in volba:
             if dvereopen==1:
                 t=("Vycházíš z tmavého sklepení. Ve chvíli kdy vyjdeš schody ucítíš na svém zátylku ostrou bolest. Upadáš na zem a téměř okamžitě ztrácíš vědomí.")
-                #winsound.PlaySound(None, winsound.SND_ASYNC)
-                #winsound.PlaySound("sound/hit.wav", winsound.SND_ASYNC)
-                time.sleep(1)
-                #winsound.PlaySound("sound/thud.wav",winsound.SND_ASYNC)
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/hit.wav"))
                 NOVA_HRA()
             elif "tyč" in volba:
                 if "tyč" in inventar:
-                    #winsound.PlaySound("sound/door_break.wav",winsound.SND_ASYNC)
-                    time.sleep(2)
-                    #winsound.PlaySound("sound/basement.wav",winsound.SND_ASYNC | winsound.SND_LOOP)
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/door_break.wav"))
                     t=("Vypáčil jsi dveře")
                     dvereopen=1
                     inventar.remove("tyč")
@@ -447,13 +446,18 @@ def NOVA_HRA():
     svitilna=0
     global skrin
     skrin=0
-    #Nutno dodělat některé přepínače
     OPT()
 def OPT():
+    #pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/inside1.wav"),loops=-1)
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/inside.wav"),loops=-1)
+    pygame.mixer.Channel(0).set_volume(0.5)
     global t
     t=("Probouzíš se na starém, zapáchajícím gauči. Vstáváš a zjišťuješ že se nacházíš v neznámé místnosti. \n\nCo uděláš?")
     OPV()
 def OPT2():
+    #pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/inside1.wav"),loops=-1)
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/inside.wav"),loops=-1)
+    pygame.mixer.Channel(0).set_volume(0.5)
     global t
     t=("Jsi v pokoji.")
     t=("Co uděláš?")
@@ -491,6 +495,8 @@ def OPV():
         PUDAT()
     if "dbg_chodba" in volba:
         CHODBAT()
+    if "dbg_ending_good" in volba:
+        ENDING_GOOD()
     if "dbg_inv" in volba:
         submit.wait_variable(var)
         volbaa=wolba.get()
@@ -652,6 +658,7 @@ def OPV():
     if "použij" in volba:
         if "izolepa" in volba and (("tágo(zlomené)" in volba and "hák(zlomený)" in volba) or ("tágo" in volba and "hák" in volba)):
             if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/tape.wav"))
                 t=("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -672,6 +679,7 @@ def OPV():
                 OPV()
         if "svítilna" in volba and "baterie" in volba:
             if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/battery.wav"))
                 t=("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -682,6 +690,7 @@ def OPV():
                 OPV()
         if "nůž(tupý)" in volba and "brousek" in volba:
             if "nůž(tupý)" in inventar and "brousek" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/knife.wav"))
                 t=("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
                 inventar.append("nůž(ostrý)")
@@ -690,6 +699,7 @@ def OPV():
                 t=("Něco potřebuješ.")
                 OPV()
         if "tv" in volba or "televize" in volba:
+            pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/tv.wav"))
             t=("Televize se zapla. V televizi jsou zprávy o nedávných vraždách. Pachatele se nepodařilo nikdy najít, ale všechny oběti měly do dlaní vyřezaný kříž. Po chvíli se rozhodneš televizi vypnout.")
             OPV()
         if "hák" in volba:
@@ -699,6 +709,7 @@ def OPV():
                         t=("Nic jiného už jsi nenašel.")
                         OPV()
                     else:
+                        pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/wood_scratch.wav"))
                         t=("Hákem sis přitáhl předmět pod gaučem. Ukázalo se že je to klíč se znakem vah. Klíč sis vzal.")
                         inventar.append("klíč(váhy)")
                         OPV()
@@ -713,6 +724,7 @@ def OPV():
                 if "dveře" and "váhy" in volba:
                     if dvere_vahy_zamceno==1:
                         if "klíč(váhy)" in inventar:
+                            pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/unlock.wav"))
                             t=("Odemkl sis dveře.")
                             dvere_vahy_zamceno=0
                             OPV()
@@ -729,6 +741,7 @@ def OPV():
                 if "dveře" and "hlavní" in volba:
                     if zamek_alfa_zamcen==1:
                         if "klíč(ALFA)" in inventar:
+                            pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/unlock.wav"))
                             t=("Odemkl jsi zámek 'ALFA'.")
                             zamek_alfa_zamcen=0
                             OPV()
@@ -745,6 +758,7 @@ def OPV():
                 if "dveře" and "hlavní" in volba:
                     if zamek_beta_zamcen==1:
                         if "klíč(BETA)" in inventar:
+                            pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/unlock.wav"))
                             t=("Odemkl jsi zámek 'BETA'.")
                             zamek_beta_zamcen=0
                             OPV()
@@ -761,6 +775,7 @@ def OPV():
                 if "dveře" and "hlavní" in volba:
                     if zamek_gama_zamcen==1:
                         if "klíč(GAMA)" in inventar:
+                            pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/unlock.wav"))
                             t=("Odemkl jsi zámek 'GAMA'.")
                             zamek_gama_zamcen=0
                             OPV()
@@ -778,6 +793,7 @@ def OPV():
         if "skříň" in volba or "pojistky" in volba:
             if "pojistka" in volba:
                 if "pojistka" in inventar:
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/fuse.wav"))
                     t=("Umístil jsi pojistku na její místo.")
                     inventar.remove("pojistka")
                     pojistka=1
@@ -791,26 +807,33 @@ def OPV():
         elif "dveře" in volba:
             if "hlavní" in volba:
                 if zamek_alfa_zamcen==1 or zamek_beta_zamcen==1 or zamek_gama_zamcen==1:
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/door_locked.wav"))
                     t=("Snažíš se dveře otevřít, ale je zamčeno.")
                     OPV()
                 else:
                     if "zbraň" in inventar:
+                        pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/door.wav"))
                         ENDING_GOOD()
                     else:
+                        pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/door.wav"))
                         ENDING_BAD()
             if "koupelna" in volba:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/door.wav"))
                 KOUPELNAT()
             if "váhy" in volba:
                 if dvere_vahy_zamceno==1:
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/door_locked.wav"))
                     t=("Lomcuješ dveřmi, ale je zamčeno.")
                     OPV()
                 else:
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/door.wav"))
                     HERNAT()
             else:
                 t=("To nějak nejde.")
                 OPV()
         if "schody" in volba or "schodiště" in volba:
             if pojistka==1:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/stairs.wav"))
                 CHODBAT()
             else:
                 t=("Nahoře je moc tma na to abys tam šel.")
@@ -824,6 +847,7 @@ def OPV():
         OPV()
 #SC04 (Kuchyně)
 def KUCHYNET():
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/kitchen.wav"),loops=-1)
     global t
     t=("Tahle místnost je očividně kuchyně. \n\nCo uděláš?")
     KUCHYNEV()
@@ -991,6 +1015,7 @@ def KUCHYNEV():
     if "použij" in volba:
         if "izolepa" in volba and (("tágo(zlomené)" in volba and "hák(zlomený)" in volba) or ("tágo" in volba and "hák" in volba)):
             if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/tape.wav"))
                 t=("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -1011,6 +1036,7 @@ def KUCHYNEV():
                 KUCHYNEV()
         if "svítilna" in volba and "baterie" in volba:
             if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/battery.wav"))
                 t=("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -1021,6 +1047,7 @@ def KUCHYNEV():
                 KUCHYNEV()
         if "nůž(tupý)" in volba and "brousek" in volba:
             if "nůž(tupý)" in inventar and "brousek" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/knife.wav"))
                 t=("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
                 inventar.append("nůž(ostrý)")
@@ -1050,6 +1077,7 @@ def KUCHYNEV():
                 C4=int(wolba.get())
                 if C1==6 and C2==8 and C3==3 and C4==1:
                     trezor_zamcen=0
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/safe.wav"))
                     t=("Trezor se otevřel. Uvnitř byla... Izolepa? Vzal sis ji k sobě.")
                     inventar.append("izolepa")
                     KUCHYNEV()
@@ -1067,6 +1095,7 @@ def KUCHYNEV():
         KUCHYNEV()
 #SC05 (Koupelna)
 def KOUPELNAT():
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/bathroom.wav"),loops=-1)
     global t
     t=("Vcházíš do něčeho, co by se dalo nazvat koupelnou. \n\nCo uděláš?")
     KOUPELNAV()
@@ -1238,6 +1267,7 @@ def KOUPELNAV():
     if "použij" in volba:
         if "izolepa" in volba and (("tágo(zlomené)" in volba and "hák(zlomený)" in volba) or ("tágo" in volba and "hák" in volba)):
             if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/tape.wav"))
                 t=("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -1258,6 +1288,7 @@ def KOUPELNAV():
                 KOUPELNAV()
         if "svítilna" in volba and "baterie" in volba:
             if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/battery.wav"))
                 t=("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -1268,6 +1299,7 @@ def KOUPELNAV():
                 KOUPELNAV()
         if "nůž(tupý)" in volba and "brousek" in volba:
             if "nůž(tupý)" in inventar and "brousek" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/knife.wav"))
                 t=("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
                 inventar.append("nůž(ostrý)")
@@ -1276,9 +1308,11 @@ def KOUPELNAV():
                 t=("Něco potřebuješ.")
                 KOUPELNAV()
         if "dveře" in volba:
+            pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/door.wav"))
             OPT2()
         if "sušička" in volba:
             if susicka==1:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/broken.wav"))
                 t=("Stisknul jsi tlačítko u červené kontrolky. Sušička se rozběhla a téměř okamžitě na to se z ní začal ozývat neuvěřitelný hluk. Poté co se zastavila (pravděpodobně nadobro) ses rozhodl ji otevřít. Uvnitř byla pojistka, kterou sis vzal.")
                 inventar.append("pojistka")
                 susicka=0
@@ -1288,6 +1322,7 @@ def KOUPELNAV():
                 KOUPELNAV()
         if "wc" in volba or "toaleta" in volba or "záchod" in volba:
             if wc==1:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/toilet.wav"))
                 t=("Zadržuješ dech, zatínáš zuby a noříš svoji ruku do odporné záchodové vody. Po chvílí pátrání nahmatáš nějaký objekt. Po vytažení se ukázalo že je to klíč. Nebo teda aspoň jeho polovina. Rozhodl ses si ji vzít.")
                 inventar.append("polovina klíče GAMA(A)")
                 wc=0
@@ -1297,6 +1332,7 @@ def KOUPELNAV():
                 KOUPELNAV()
         if "vana" in volba:
             if vana_naplnena==1:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/drain.wav"))
                 t=("Vytáhl jsi špunt u vany a po nějaké chvíli se všechna voda z vany vypustila. Na dně vany ležela malá vodotěsná svítilna. Po jejím vyzkoušení zjišťuješ, že v ní nejsou baterie, ale stejně si ji raději vezmeš.")
                 inventar.append("svítilna(bez baterií)")
                 vana_naplnena=0
@@ -1312,8 +1348,15 @@ def KOUPELNAV():
 #SC06 (Herna)
 def HERNAT():
     global t
+    global krb_plamen
     t=("Tato místnost se zdá byt herna. \n\nCo uděláš?")
-    HERNAV()
+    if krb_plamen==1:
+        pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/rain.wav"),loops=-1)
+        pygame.mixer.Channel(2).play(pygame.mixer.Sound("sound/fire.wav"),loops=-1)
+        HERNAV()
+    else:
+        pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/rain.wav"),loops=-1)
+        HERNAV()
 def HERNAV():
     global t
     global inventar
@@ -1497,6 +1540,7 @@ def HERNAV():
     if "použij" in volba:
         if "izolepa" in volba and (("tágo(zlomené)" in volba and "hák(zlomený)" in volba) or ("tágo" in volba and "hák" in volba)):
             if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/tape.wav"))
                 t=("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -1517,6 +1561,7 @@ def HERNAV():
                 HERNAV()
         if "svítilna" in volba and "baterie" in volba:
             if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/battery.wav"))
                 t=("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -1527,6 +1572,7 @@ def HERNAV():
                 HERNAV()
         if "nůž(tupý)" in volba and "brousek" in volba:
             if "nůž(tupý)" in inventar and "brousek" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/knife.wav"))
                 t=("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
                 inventar.append("nůž(ostrý)")
@@ -1535,6 +1581,8 @@ def HERNAV():
                 t=("Něco potřebuješ.")
                 HERNAV()
         if "dveře" in volba:
+            pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/door.wav"))
+            pygame.mixer.Channel(2).stop()
             OPT2()
         if "krb" in volba:
             if krb_plamen==1:
@@ -1557,6 +1605,7 @@ def HERNAV():
             else:
                 if "alkohol" in volba:
                     if "alkohol" in inventar:
+                        pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/pour.wav"))
                         t=("Nalil jsi na dřevo alkohol.")
                         krb_alkohol=1
                         inventar.remove("alkohol")
@@ -1567,6 +1616,7 @@ def HERNAV():
                 if "zapalovač" in volba:
                     if "zapalovač" in inventar:
                         if krb_alkohol==1:
+                            pygame.mixer.Channel(2).play(pygame.mixer.Sound("sound/fire.wav"),loops=-1)
                             t=("Zapálil jsi dřevo nasáklé alkoholem, které okamžitě vzplanulo.")
                             krb_plamen=1
                             HERNAV()
@@ -1596,6 +1646,7 @@ def HERNAV():
             if "nůž" in volba:
                 if "nůž(ostrý)" in inventar:
                     if telo_rozrezane==0:
+                        pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/flesh.wav"))
                         t=("S neuvěřitelným odporem vytahujeě svůj nůž a pomalu řežeš břicho mrtvého. Při prvním kontaktu nože se vyvalilo obrovské množství krve ale ty dále pokračuješ. Když se dostaneš k žaludku nacházíš klíč, který sis vzal.")
                         inventar.append("klíč(BETA)")
                         telo_rozrezane=1
@@ -1617,6 +1668,7 @@ def HERNAV():
         HERNAV()
 #SC07 (Chodba)
 def CHODBAT():
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/clock.wav"),loops=-1)
     global t
     t=("Jsi na chodbě v druhém patře. \n\nCo uděláš?")
     CHODBAV()
@@ -1767,6 +1819,7 @@ def CHODBAV():
     if "použij" in volba:
         if "izolepa" in volba and (("tágo(zlomené)" in volba and "hák(zlomený)" in volba) or ("tágo" in volba and "hák" in volba)):
             if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/tape.wav"))
                 t=("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -1787,6 +1840,7 @@ def CHODBAV():
                 CHODBAV()
         if "svítilna" in volba and "baterie" in volba:
             if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/battery.wav"))
                 t=("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -1797,6 +1851,7 @@ def CHODBAV():
                 CHODBAV()
         if "nůž(tupý)" in volba and "brousek" in volba:
             if "nůž(tupý)" in inventar and "brousek" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/knife.wav"))
                 t=("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
                 inventar.append("nůž(ostrý)")
@@ -1806,14 +1861,17 @@ def CHODBAV():
                 CHODBAV()
         if "dveře" in volba:
             if "ložnice" in volba:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/door.wav"))
                 LOZNICET()
             if "balkon" in volba:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/door_locked.wav"))
                 t=("Dveře jsou zablokované spadlou větví.")
                 CHODBAV()
             if "beran" in volba or "knihovna" in volba:
                 if dvere_beran_zamceno==1:
                     if "klíč(beran)" in volba:
                         if "klíč(beran)" in inventar:
+                            pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/unlock.wav"))
                             t=("Odemkl jsi dveře se znamením berana.")
                             dvere_beran_zamceno=0
                             CHODBAV()
@@ -1824,16 +1882,20 @@ def CHODBAV():
                         t=("Dveře jsou zamčené.")
                         CHODBAV()
                 else:
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/door.wav"))
                     KNIHOVNAT()
         if "okno" in volba or "větev" in volba:
+            pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/branch.wav"))
             t=("Přelezl jsi po větvi stromu na balkón.")
             BALKONT()
         if "schody" in volba:
+            pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/stairs.wav"))
             OPT2()
         if "poklop" in volba:
             if poklop==0:
                 if "hák" in volba:
                     if "hák(prodloužený)" in inventar:
+                        pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/squeak.wav"))
                         t=("Odklopil jsi poklop a dolů se spustily schody na půdu.")
                         poklop=1
                         CHODBAV()
@@ -1841,13 +1903,16 @@ def CHODBAV():
                         t=("Nemáš dostatečně dlouhý nástroj.")
                         CHODBAV()
                 else:
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/ladder.wav"))
                     t=("Poklop je zavřený.")
                     CHODBAV()
             else:
+                
                 PUDAT()
         if "kukačky" in volba:
             if "ručička" in volba:
                 if "ručička" in inventar:
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/cuckoo.wav"))
                     t=("Zasadil jsi ručičku do hodin a nastavil 12 hodin. Místo kukačky na rameni vyjel klíč se znamením berana, který sis k sobě vzal.")
                     inventar.append("klíč(beran)")
                     inventar.remove("ručička")
@@ -1867,6 +1932,7 @@ def CHODBAV():
         CHODBAV()
 #SC08 (Ložnice)
 def LOZNICET():
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/rain.wav"),loops=-1)
     global t
     t=("Jsi v ložnici. \n\nCo uděláš?")
     LOZNICEV()
@@ -2020,6 +2086,7 @@ def LOZNICEV():
                 t=("V šuplících už nic není.")
                 LOZNICEV()
             else:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/drawer.wav"))
                 t=("V jednom z šuplíků jsi našel modelářské lepidlo a sadu baterií. Oboje ses rozhodl vzít k sobě.")
                 inventar.append("lepidlo")
                 inventar.append("baterie")
@@ -2057,6 +2124,7 @@ def LOZNICEV():
     if "použij" in volba:
         if "izolepa" in volba and (("tágo(zlomené)" in volba and "hák(zlomený)" in volba) or ("tágo" in volba and "hák" in volba)):
             if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/tape.wav"))
                 t=("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -2077,6 +2145,7 @@ def LOZNICEV():
                 LOZNICEV()
         if "svítilna" in volba and "baterie" in volba:
             if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/battery.wav"))
                 t=("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -2087,6 +2156,7 @@ def LOZNICEV():
                 LOZNICEV()
         if "nůž(tupý)" in volba and "brousek" in volba:
             if "nůž(tupý)" in inventar and "brousek" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/knife.wav"))
                 t=("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
                 inventar.append("nůž(ostrý)")
@@ -2095,6 +2165,7 @@ def LOZNICEV():
                 t=("Něco potřebuješ.")
                 LOZNICEV()
         if "dveře" in volba:
+            pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/door.wav"))
             CHODBAT()
         else:
             t=("Tento příkaz neznám: ",volba)
@@ -2104,6 +2175,7 @@ def LOZNICEV():
         LOZNICEV()
 #SC09 (Knihovna)
 def KNIHOVNAT():
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/library.wav"),loops=-1)
     global t
     t=("Nacháziš se v místnosti, která slouží jako knihovna. \n\nCo uděláš?")
     KNIHOVNAV()
@@ -2258,6 +2330,7 @@ def KNIHOVNAV():
     if "použij" in volba:
         if "izolepa" in volba and (("tágo(zlomené)" in volba and "hák(zlomený)" in volba) or ("tágo" in volba and "hák" in volba)):
             if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/tape.wav"))
                 t=("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -2278,6 +2351,7 @@ def KNIHOVNAV():
                 KNIHOVNAV()
         if "svítilna" in volba and "baterie" in volba:
             if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/battery.wav"))
                 t=("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -2288,6 +2362,7 @@ def KNIHOVNAV():
                 KNIHOVNAV()
         if "nůž(tupý)" in volba and "brousek" in volba:
             if "nůž(tupý)" in inventar and "brousek" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/knife.wav"))
                 t=("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
                 inventar.append("nůž(ostrý)")
@@ -2296,18 +2371,22 @@ def KNIHOVNAV():
                 t=("Něco potřebuješ.")
                 KNIHOVNAV()
         if "dveře" in volba:
+            pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/door.wav"))
             CHODBAT()
         if "pc" in volba or "počítač" in volba:
             if PC==0:
                 t="Zadejte heslo:"
                 PRINT()
                 submit.wait_variable(var)
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/keyboard.wav"))
                 passw=wolba.get()
                 if passw=="Hamlet":
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/right.wav"))
                     t=("Počítač se odemkl.")
                     PC=1
                     KNIHOVNAV()
                 else:
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/wrong.wav"))
                     t=("Špatné heslo.")
                     KNIHOVNAV()
             else:
@@ -2317,6 +2396,7 @@ def KNIHOVNAV():
             t="Jakou knihu hledáš? (Pro konec nech řádku prázdnou):"
             PRINT()
             submit.wait_variable(var)
+            pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/book.wav"))
             kniha=wolba.get()
             if kniha=="Dekameron":
                 if "klíč(alfa)" in inventar:
@@ -2342,6 +2422,7 @@ def KNIHOVNAV():
         KNIHOVNAV()
 #SC10 (Balkón)
 def BALKONT():
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/rain_out.wav"),loops=-1)
     global t
     t=("Jsi na balkóně. \n\nCo uděláš?")
     BALKONV()
@@ -2518,6 +2599,7 @@ def BALKONV():
     if "použij" in volba:
         if "izolepa" in volba and (("tágo(zlomené)" in volba and "hák(zlomený)" in volba) or ("tágo" in volba and "hák" in volba)):
             if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/tape.wav"))
                 t=("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                 inventar.remove("tágo(zlomené)")
                 inventar.remove("hák(zlomený)")
@@ -2538,6 +2620,7 @@ def BALKONV():
                 BALKONV()
         if "svítilna" in volba and "baterie" in volba:
             if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/battery.wav"))
                 t=("Vložil jsi baterie do svítilny.")
                 inventar.remove("svítilna(bez baterií)")
                 inventar.remove("baterie")
@@ -2548,6 +2631,7 @@ def BALKONV():
                 BALKONV()
         if "nůž(tupý)" in volba and "brousek" in volba:
             if "nůž(tupý)" in inventar and "brousek" in inventar:
+                pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/knife.wav"))
                 t=("Naostřil jsi nůž.")
                 inventar.remove("nůž(tupý)")
                 inventar.append("nůž(ostrý)")
@@ -2556,10 +2640,12 @@ def BALKONV():
                 t=("Něco potřebuješ.")
                 BALKONV()
         if "okno" in volba or "větev" in volba:
+            pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/branch.wav"))
             CHODBAT()
         if "okap" in volba or "rýna" in volba:
             if "hák" in volba:
                 if "hák(prodloužený)" in inventar:
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/gun_ground.wav"))
                     t=("Použil jsi svůj prodloužený hák a vystrčil z okapu neznámý předmět. Zdá se že se jedná o nabitou zbraň. Rozhodl ses vzít si ji k sobě.")
                     inventar.append("zbraň")
                     BALKONV()
@@ -2574,6 +2660,8 @@ def BALKONV():
         BALKONV()
 #SC11 (Půda)
 def PUDAT():
+    pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/attic.wav"),loops=-1)
+    pygame.mixer.Channel(0).set_volume(0.25)
     global t
     global svitilna
     if svitilna==1:
@@ -2624,6 +2712,7 @@ def PUDAV():
             if "použij" in volba:
                 if "svítilna" in volba:
                     if "svítilna" in inventar:
+                        pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/switch.wav"))
                         t=("Svítilna se naštěstí opravdu rozsvítila a s její pomocí už vidíš vše co potřebuješ.")
                         svitilna=1
                         PUDAV()
@@ -2775,9 +2864,11 @@ def PUDAV():
                     PUDAV()
             if "použij" in volba:
                 if "poklop" in volba or "dveře" in volba:
+                    pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/ladder.wav"))
                     CHODBAT()
                 if "izolepa" in volba and (("tágo(zlomené)" in volba and "hák(zlomený)" in volba) or ("tágo" in volba and "hák" in volba)):
                     if "izolepa" in inventar and "tágo(zlomené)" in inventar and "hák(zlomený)" in inventar:
+                        pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/tape.wav"))
                         t=("Slepil jsi zbytky tága a háku a vyrobil tak prodloužený hák.")
                         inventar.remove("tágo(zlomené)")
                         inventar.remove("hák(zlomený)")
@@ -2798,6 +2889,7 @@ def PUDAV():
                         PUDAV()
                 if "svítilna" in volba and "baterie" in volba:
                     if "svítilna(bez baterií)" in inventar and "baterie" in inventar:
+                        pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/battery.wav"))
                         t=("Vložil jsi baterie do svítilny.")
                         inventar.remove("svítilna(bez baterií)")
                         inventar.remove("baterie")
@@ -2808,6 +2900,7 @@ def PUDAV():
                         PUDAV()
                 if "nůž(tupý)" in volba and "brousek" in volba:
                     if "nůž(tupý)" in inventar and "brousek" in inventar:
+                        pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/knife.wav"))
                         t=("Naostřil jsi nůž.")
                         inventar.remove("nůž(tupý)")
                         inventar.append("nůž(ostrý)")
@@ -2817,10 +2910,20 @@ def PUDAV():
                         PUDAV()
                 if "skříň" in volba:
                     if skrin==0:
-                        A=input("První číslo:")
-                        B=input("Druhé číslo:")
-                        C=input("Třetí číslo:")
-                        if A=="4" and B=="5" and C=="1":
+                        t="První číslo:"
+                        PRINT()
+                        submit.wait_variable(var)
+                        A=int(wolba.get())
+                        t="Druhé číslo:"
+                        PRINT()
+                        submit.wait_variable(var)
+                        B=int(wolba.get())
+                        t="Třetí číslo:"
+                        PRINT()
+                        submit.wait_variable(var)
+                        C=int(wolba.get())
+                        if A==4 and B==5 and C==1:
+                            pygame.mixer.Channel(1).play(pygame.mixer.Sound("sound/locker.wav"))
                             t=("Skříň se otevřela a v ní byl brousek, který sis vzal.")
                             inventar.append("brousek")
                             skrin=1
@@ -2861,16 +2964,16 @@ rychlost.set(2)
 
 main.bind("<Return>", vr)
 
-text=Text(main, width=100, height=50, wrap=WORD, bg="black", fg="yellow", relief="flat")
+text=Text(main, width=100, height=50, wrap=WORD, bg="black", fg="yellow", relief="flat", font="Courier 10")
 text.pack(fill=X)
 
-wolba=Entry(main, width=130, relief="flat", bg="black", fg="yellow", justify="center")
+wolba=Entry(main, relief="flat", bg="black", fg="yellow", justify="center", font="Courier 10")
 wolba.pack(fill=X)
 
-submit=Button(main, text="OK", command=vr, relief="flat", bg="black", fg="yellow")
+submit=Button(main, text="OK", command=vr, relief="flat", bg="black", fg="yellow", font="Courier 10")
 submit.pack(fill=X)
 
-start=Button(main, text="START", command=SKLEP1T, relief="flat", bg="black", fg="yellow")
+start=Button(main, text="START", command=SKLEP1T, relief="flat", bg="black", fg="yellow", font="Courier 10")
 start.pack(fill=X)
 
 main.mainloop()
