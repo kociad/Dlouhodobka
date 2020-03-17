@@ -3017,8 +3017,8 @@ rychlost.set(2)
 
 main.bind("<Return>", vr)
 
-text=Text(main, width=100, height=50, wrap=WORD, bg="black", fg="yellow", relief="flat", font="Courier 10")
-text.pack(fill=X)
+text=Text(main, wrap=WORD, bg="black", fg="yellow", relief="flat", font="Courier 10", width=80, height=35)
+text.pack(fill=BOTH)
 
 wolba=Entry(main, relief="flat", bg="black", fg="yellow", justify="center", font="Courier 10")
 wolba.pack(fill=X)
