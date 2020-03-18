@@ -53,6 +53,8 @@ def CREDITS():
     PRINTC()
     t="https://www.audacityteam.org/"
     PRINTC()
+    t="https://en.wikipedia.org/"
+    PRINTC()
     t="Závěrečná znělka 'Theme of Laura' je majetkem Konami Music Entertainment, Inc."
     PRINTC()
     t="Děkuji ti za hraní"
