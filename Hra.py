@@ -1,10 +1,65 @@
-#import winsound
 import pygame
 import time
 from tkinter import *
 
 global first_launch
 first_launch=0
+
+def TITLE():
+    start.pack_forget()
+    text.tag_configure("center", justify='center')
+    text.config(state=NORMAL)
+    text.delete('1.0', END)
+    text.config(state=DISABLED)
+    global t
+    t="                            .---.                                     "
+    PRINTT()
+    t="                  /|        |   |             _..._        .          "
+    PRINTT()
+    t="                  ||        |   |           .'     '.    .'|          "
+    PRINTT()
+    t="                  ||        |   |          .   .-.   . .'  |          "
+    PRINTT()
+    t="                  ||  __    |   |    __    |  '   '  |<    |          "
+    PRINTT()
+    t="                  ||/'__ '. |   | .:--.'.  |  |   |  | |   | ____     "
+    PRINTT()
+    t="                  |:/`  '. '|   |/ |   \ | |  |   |  | |   | \ .'     "
+    PRINTT()
+    t="                  ||     | ||   |`- __ | | |  |   |  | |   |/  .      "
+    PRINTT()
+    t=" ________________ ||\    / '|   | .'.''| | |  |   |  | |    /\  \     "
+    PRINTT()
+    t="|________________||/\'..' / '---'/ /   | |_|  |   |  | |   |  \  \    "
+    PRINTT()
+    t="                  '  `'-'`       \ \._,\ '/|  |   |  | '    \  \  \   "
+    PRINTT()
+    t="                                  `--'  `- '--'   '--''------'  '---' "
+    PRINTT()
+    t=""
+    PRINTT()
+    t=" "
+    PRINTT()
+    t="Stiskni ENTER"
+    PRINTT()
+    submit.wait_variable(var)
+    text.config(state=NORMAL)
+    text.delete('1.0', END)
+    text.tag_remove("center", "1.0", "end")
+    text.config(state=DISABLED)
+    SKLEP1T()
+
+def PRINTT():
+    global t
+    wolba.delete(0,"end")
+    text.config(state=NORMAL)
+    for i in t:
+        text.insert(END, i)
+        text.tag_add("center", "1.0", "end")
+        text.yview(END)
+        text.update()
+    text.insert(END, "\n")
+    text.config(state=DISABLED)
 
 def ENDING_GOOD():
     pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/gunshot.wav"))
@@ -54,6 +109,8 @@ def CREDITS():
     t="https://www.audacityteam.org/"
     PRINTC()
     t="https://en.wikipedia.org/"
+    PRINTC()
+    t="http://patorjk.com/software/taag/"
     PRINTC()
     t="Závěrečná znělka 'Theme of Laura' je majetkem Konami Music Entertainment, Inc."
     PRINTC()
@@ -169,7 +226,6 @@ def SKLEP1T():
     pygame.mixer.init()
 
     ################################
-    start.pack_forget()
     global t
     pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/basement.wav"),loops=-1)
     t="Vítej do mojí hry! Pro provedení akce piš do příkazové řádky. Hra má tři hlavní akce: 'Prozkoumej' 'Vezmi' a 'Použij'. Svůj inventář si prohlédneš příkazem 'inventář'. Tyto akce kombinuj s předměty v herním světě nebo v inventáři. Objekty piš vždy v prvním pádě (hlavu=hlava atd.). Pojďme si to vyzkoušet v tomto úvodu. \n\nProbouzíš se v chladné a vlhké místnosti. Vzadu na hlavě cítíš ostrou bolest. Tvé ruce jsou svázáné, ale naštěstí cítíš v kapse svůj věrný nůž. Zkus napsat 'prozkoumej kapsy'.\n\nCo uděláš?"
@@ -503,14 +559,12 @@ def NOVA_HRA():
     skrin=0
     OPT()
 def OPT():
-    #pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/inside1.wav"),loops=-1)
     pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/inside.wav"),loops=-1)
     pygame.mixer.Channel(0).set_volume(0.75)
     global t
     t=("Probouzíš se na starém, zapáchajícím gauči. Vstáváš a zjišťuješ že se nacházíš v neznámé místnosti. \n\nCo uděláš?")
     OPV()
 def OPT2():
-    #pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/inside1.wav"),loops=-1)
     pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/inside.wav"),loops=-1)
     pygame.mixer.Channel(0).set_volume(0.75)
     global t
@@ -3028,7 +3082,7 @@ wolba.pack(fill=X)
 submit=Button(main, text="OK", command=vr, relief="flat", bg="black", fg="yellow", font="Courier 10")
 submit.pack(fill=X)
 
-start=Button(main, text="START", command=SKLEP1T, relief="flat", bg="black", fg="yellow", font="Courier 10")
+start=Button(main, text="START", command=TITLE, relief="flat", bg="black", fg="yellow", font="Courier 10")
 start.pack(fill=X)
 
 main.mainloop()
