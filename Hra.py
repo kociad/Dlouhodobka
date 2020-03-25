@@ -112,6 +112,8 @@ def CREDITS():
     PRINTC()
     t="http://patorjk.com/software/taag/"
     PRINTC()
+    t="https://gitforwindows.org/"
+    PRINTC()
     t="Závěrečná znělka 'Theme of Laura' je majetkem Konami Music Entertainment, Inc."
     PRINTC()
     t="Děkuji ti za hraní"
@@ -153,12 +155,16 @@ def PRINT():
     
 #SC00_BLANK
 def BLANKT():
-    print("PLACEHOLDER") #Úvodní text scény
-    print("Co uděláš?")
+    t="PLACEHOLDER" #Úvodní text scény
+    PRINT()
+    t="Co uděláš?"
     BLANKV()
 def BLANKV():
     global inventar #Inventář musí být vždy globální
-    volba=input("Zadej příkaz:")
+    global t #Nutné pro správné vypisování textu
+    PRINT()
+    submit.wait_variable(var)
+    volba=wolba.get()
     volba=volba.lower()
     #---------------------DEBUG----------------------
     if "dbg_tutorial_skip" in volba:
@@ -200,6 +206,9 @@ def BLANKV():
             else:
                 print("PLACEHOLDER")
                 BLANKV()
+        else:
+            print("Tento příkaz neznám.", volba)
+            BLANKV()
     if "vezmi" in volba:
         if "ITEM" in volba:
             if "ITEM" in inventar:
@@ -215,8 +224,11 @@ def BLANKV():
         if "PLACEHOLDER_DOOR" in volba:
             return
             #další scéna
+        else:
+            print("Tento příkaz neznám.", volba)
+            BLANKV()
     else:
-        print("Tento příkaz neznám.")
+        print("Tento příkaz neznám.", volba)
         BLANKV()
         
 #SC01 (SKLEP TMA)
@@ -228,7 +240,7 @@ def SKLEP1T():
     ################################
     global t
     pygame.mixer.Channel(0).play(pygame.mixer.Sound("sound/basement.wav"),loops=-1)
-    t="Vítej do mojí hry! Pro provedení akce piš do příkazové řádky. Hra má tři hlavní akce: 'Prozkoumej' 'Vezmi' a 'Použij'. Svůj inventář si prohlédneš příkazem 'inventář'. Tyto akce kombinuj s předměty v herním světě nebo v inventáři. Objekty piš vždy v prvním pádě (hlavu=hlava atd.). Pojďme si to vyzkoušet v tomto úvodu. \n\nProbouzíš se v chladné a vlhké místnosti. Vzadu na hlavě cítíš ostrou bolest. Tvé ruce jsou svázáné, ale naštěstí cítíš v kapse svůj věrný nůž. Zkus napsat 'prozkoumej kapsy'.\n\nCo uděláš?"
+    t="Vítej do _blank! Pro provedení akce piš do příkazové řádky. Hra má tři hlavní akce: 'Prozkoumej' 'Vezmi' a 'Použij'. Svůj inventář si prohlédneš příkazem 'inventář'. Tyto akce kombinuj s předměty v herním světě nebo v inventáři. Objekty piš vždy v prvním pádě (hlavu=hlava atd.). Pojďme si to vyzkoušet v tomto úvodu. \n\nProbouzíš se v chladné a vlhké místnosti. Vzadu na hlavě cítíš ostrou bolest. Tvé ruce jsou svázáné, ale naštěstí cítíš v kapse svůj věrný nůž. Zkus napsat 'prozkoumej kapsy'.\n\nCo uděláš?"
     global inventar
     global svazan
     global svetlo
@@ -3065,7 +3077,7 @@ menubar.add_command(label="Pomoc!", command=helpp)
 
 main.resizable(False, False)
 main.configure(bg="gray", menu=menubar)
-main.title("game")
+main.title("_blank")
 
 var=IntVar()
 rychlost=StringVar()
