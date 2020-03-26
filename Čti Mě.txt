@@ -1,4 +1,4 @@
-Pro správnou funkci hry je potřeba knihovna "PyGame".
+Pro správnou funkci hry je potřeba Python a knihovna "PyGame".
 Pro jeji instalaci :
 1) Otevři příkazovou řádku (CMD)
 2) Napiš: "pip install pygame"
